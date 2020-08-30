@@ -1,5 +1,7 @@
-<title>Registro de Usuarios</title>
-<?php require_once("header.php")?>
+<title>Registro de Clientes</title>
+<?php  require_once("header.php")?>
+
+<!--Inicio página Clientes -->
 
 <!--Inicia contenido de la página  registraUsuarios-->
 <!-- Begin Page Content -->
@@ -12,7 +14,7 @@
             <div class="card shadow mb-4 ">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between ">
-                    <h3 class="m-0 font-weight-bold text-primary ">Registro de Usuarios</h3>
+                    <h3 class="m-0 font-weight-bold text-primary ">Registro de Clientes</h3>
                     <div class="dropdown no-arrow">
                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
@@ -40,30 +42,26 @@
                         </div>
                         <div class="row mt-2 mb-4">
                             <div class="col">
-                                <label for="covencional"><strong>Número convencional</strong></label>
-                                <input type="text" class="form-control" name="convencional" id="convencional" maxlength="10" minlength="7" placeholder="Ej: (043) 453-243" onkeypress="return validaNumericos(event) ;">
+                                <label for="covencional"><strong>Sexo</strong></label>
+                                <select name="sexo" id="sexo" class="form-control">
+                                    <option value="" selected="selected" disabled="disabled">--Seleccione una opción--</option>
+                                    <option value="hombre">Hombre</option>
+                                    <option value="mujer">Mujer</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label for="direccion"><strong>Dirección domiciliaria</strong></label>
+                                <input type="text" class="form-control" name="direccion" id="direccion" maxlength="100" min="3" required="required">
                             </div>
                             <di class="col">
                                 <label for="celular"><strong>Número celular</strong></label>
                                 <input type="text" class="form-control" name="celular" id=" celular" maxlength="10" minlength="10" placeholder="Ej: 0987654321" onkeypress="return validaNumericos(event) ;">
                             </di>
-                            <div class="col">
-                                <label for="direccion"><strong>Dirección domiciliaria</strong></label>
-                                <input type="text" class="form-control" name="direccion" id="direccion" maxlength="100" min="3" required="required">
-                            </div>
                         </div>
                         <div class="row mt-2 mb-4">
-                            <div class="col">
+                            <div class="col-lg-4">
                                 <label for="email"><strong>Correo electrónico</strong></label>
                                 <input type="email" class="form-control" name="email" id="email" minlength="7" maxlength="75" required="required" placeholder="ejemplo@gmail.com">
-                            </div>
-                            <div class="col">
-                                <label for="usuario"><strong>Usuario</strong></label>
-                                <input type="text" class="form-control" name="usuario" id="usuario" minlength="3" maxlength="75" required="required">
-                            </div>
-                            <div class="col">
-                                <label for="clave"><strong>Clave</strong></label>
-                                <input type="text" class="form-control" name="clave" id="clave" required="required"  minlength="8" maxlength="15">
                             </div>
                         </div>
                         <hr>
@@ -84,13 +82,12 @@
                     </form>
                     <!--Fin formulario registro usuarios -->
 
+                </div>
             </div>
         </div>
     </div>
-</div>
+
+    <!--Fin página Clientes -->
 
 
-<!--Finaliza contenido de la página registraUsuarios-->
-
-<?php require_once("footer.php")?>
-
+<?php require_once ("footer.php")?>

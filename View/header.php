@@ -65,9 +65,25 @@
                         <i class="fas fa-fw fa-users"></i>
                         Usuarios
                     </a>
-                    <a class="collapse-item" href="cards.html">
+                    <a class="collapse-item" href="clientes.php">
                         <i class="fas fa-fw fa-users"></i>
                         Clientes
+                    </a>
+                    <a class="collapse-item" href="ovalos.php">
+                        <i class="fas fa-fw fa-square"></i>
+                        Ovalos
+                    </a>
+                    <a class="collapse-item" href="lotes.php">
+                        <i class="fas fa-fw fa-building"></i>
+                        Lotes
+                    </a>
+                    <a class="collapse-item" href="hriego.php">
+                        <i class="fas fa-fw fa-calendar-alt"></i>
+                        Horarios de Riego
+                    </a>
+                    <a class="collapse-item" href="parametros.php">
+                        <i class="fas fa-fw fa-toolbox"></i>
+                        Parametros
                     </a>
                 </div>
             </div>

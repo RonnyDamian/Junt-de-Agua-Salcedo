@@ -2,7 +2,7 @@
 $(document).ready(function () {
   $("#enviar").click(function () {
       toastr.options = {
-          "closeButton": true,
+          "closeButton":true,
           "debug": false,
           "newestOnTop": true,
           "progressBar": true,
@@ -18,7 +18,7 @@ $(document).ready(function () {
           "showMethod": "fadeIn",
           "hideMethod": "fadeOut"
       }
-      toastr["info"]("Haz dado click en el boton de guardar", "Click")
+      toastr["warning"]("Haz dado click en el boton de guardar", "Click")
 
   });
 });
