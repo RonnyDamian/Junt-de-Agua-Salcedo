@@ -23,11 +23,11 @@
                 <!-- Card Body -->
                 <div class="card-body">
                     <!--Inicio formulario registro usuarios -->
-                    <form>
+                    <form id="frminsert"  onsubmit="return agregarUsuario()"  method="post">
                         <div class="row mt-2 mb-4">
                             <div class="col">
                                 <label for="nombre"><strong>Nombre</strong></label>
-                                <input type="text" class="form-control" name="nombre" id="nombre" minlength="3" maxlength="70" required="required"  onkeypress="return validaLetras(event);">
+                                <input type="text" class="form-control" name="nombre" id="nombre" minlength="3" maxlength="70" required="required"  >
                             </div>
                             <div class="col">
                                 <label for="apellido"><strong>Apellido</strong></label>
@@ -41,7 +41,7 @@
                         <div class="row mt-2 mb-4">
                             <div class="col">
                                 <label for="covencional"><strong>Número convencional</strong></label>
-                                <input type="text" class="form-control" name="convencional" id="convencional" maxlength="10" minlength="7" placeholder="Ej: (043) 453-243" onkeypress="return validaNumericos(event) ;">
+                                <input type="text" class="form-control" name="telefono" id="convencional" maxlength="10" minlength="7" placeholder="Ej: (043) 453-243" onkeypress="return validaNumericos(event) ;">
                             </div>
                             <di class="col">
                                 <label for="celular"><strong>Número celular</strong></label>
@@ -63,7 +63,7 @@
                             </div>
                             <div class="col">
                                 <label for="clave"><strong>Clave</strong></label>
-                                <input type="text" class="form-control" name="clave" id="clave" required="required"  minlength="8" maxlength="15">
+                                <input type="text" class="form-control" name="password" id="clave" required="required"  minlength="8" maxlength="15">
                             </div>
                         </div>
                         <hr>
@@ -75,7 +75,7 @@
                                 </a>
                             </div>
                             <div class="col">
-                                <button type="submit" class="btn btn-success float-left" id="enviar">
+                                <button type="submit" class="btn btn-success float-left" id="">
                                     <i class="far fa-save"></i>
                                     Guardar
                                 </button>
@@ -84,13 +84,12 @@
                     </form>
                     <!--Fin formulario registro usuarios -->
 
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
-<!--Finaliza contenido de la página registraUsuarios-->
+    <!--Finaliza contenido de la página registraUsuarios-->
 
 <?php require_once("footer.php")?>
-

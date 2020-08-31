@@ -1,3 +1,9 @@
+<?php
+session_start();
+if(empty($_SESSION['s_usuario'])){
+    header("Location:../index.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -193,7 +199,7 @@
 
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small mr-3 " style="color:#ffffff !important" ><strong>Brayan Chiluisa</strong></span>
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small mr-3 " style="color:#ffffff !important" ><strong><?php echo $_SESSION['s_usuario'] ?></strong></span>
                             <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
                         </a>
                         <!-- Dropdown - User Information -->

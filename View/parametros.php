@@ -26,13 +26,13 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+                    <tr class="text-center">
                       <th>8.00</th>
                       <th>0.50</th>
                       <th>5.00</th>
                       <th>10.00</th>
                       <th>0.20</th>
-                      <th class="text-center"><button class="btn btn-warning">
+                      <th class="text-center"><button class="btn btn-warning" data-toggle="modal" data-target="#editarParametros">
                               <i class="fa fa-pencil-alt"></i>
                               Editar
                           </button></th>
@@ -45,4 +45,5 @@
 
         </div>
         <!-- /.container-fluid -->
+<?php require_once("modalParamemtros.php")?>
 <?php require_once ("footer.php")?>

@@ -35,7 +35,7 @@
             <div class="modal-body"><strong>Seleccione "Cerrar sesión" a continuación si está listo para finalizar su sesión actual.</strong></div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                <a class="btn btn-primary" href="../index.php">Cerrar sesión</a>
+                <a class="btn btn-primary" href="../Controller/logout.php">Cerrar sesión</a>
             </div>
         </div>
     </div>
@@ -60,6 +60,7 @@
 <!-- Page level custom scripts -->
 <script src="../public/js/demo/chart-area-demo.js"></script>
 <script src="../public/js/demo/chart-pie-demo.js"></script>
+<script src="../js/usuarios.js"></script>
 
 </body>
 
