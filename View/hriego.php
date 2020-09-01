@@ -1,4 +1,4 @@
-<title>Horario de Riego</title>
+<title>Horario de Riego | Junta Agua</title>
 <?php require_once ("header.php")?>
 <!--Inicio Página Horairo de riego -->
 <div class="container-fluid ">

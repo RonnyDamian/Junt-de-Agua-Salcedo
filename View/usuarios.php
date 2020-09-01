@@ -26,11 +26,11 @@
                     <form id="frminsert"  onsubmit="return agregarUsuario()"  method="post">
                         <div class="row mt-2 mb-4">
                             <div class="col">
-                                <label for="nombre"><strong>Nombre</strong></label>
+                                <label for="nombre"><strong>Nombres</strong></label>
                                 <input type="text" class="form-control" name="nombre" id="nombre" minlength="3" maxlength="70" required="required"  >
                             </div>
                             <div class="col">
-                                <label for="apellido"><strong>Apellido</strong></label>
+                                <label for="apellido"><strong>Apellidos</strong></label>
                                 <input type="text" class="form-control" name="apellido" id="apellido" minlength="3" maxlength="70" required="required">
                             </div>
                             <div class="col">
@@ -63,7 +63,7 @@
                             </div>
                             <div class="col">
                                 <label for="clave"><strong>Clave</strong></label>
-                                <input type="text" class="form-control" name="password" id="clave" required="required"  minlength="8" maxlength="15">
+                                <input type="password" class="form-control" name="password" id="clave" required="required"  minlength="8" maxlength="15">
                             </div>
                         </div>
                         <hr>

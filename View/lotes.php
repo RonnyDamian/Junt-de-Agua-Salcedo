@@ -1,3 +1,4 @@
+<title>Registro Lotes | Junta Agua</title>
 <?php require_once("header.php")?>
 
 <!--Inicia Página Lotes -->

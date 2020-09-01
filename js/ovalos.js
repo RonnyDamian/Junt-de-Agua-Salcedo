@@ -19,7 +19,7 @@ function limpiar(){
     $("#usuario").val("");
     $("#password").val("");
 }
-function agregarUsuario(){
+function agregarOvalo(){
 
     $.ajax({
         type:"POST",

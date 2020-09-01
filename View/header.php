@@ -23,7 +23,9 @@ if(empty($_SESSION['s_usuario'])){
 
     <!-- Custom styles for this template-->
     <link href="../public/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../public/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../public/toast/toastr.min.css">
+    <link rel="stylesheet" href="../public/sweetalert2/sweetalert2.min.css">
 
 </head>
 
@@ -61,13 +63,13 @@ if(empty($_SESSION['s_usuario'])){
 
         <!--Inicio Navegación Gestión-->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                <i class="fas fa-fw fa-cog"></i>
+            <a class="nav-link collapsed" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
+                <i class="fas fa-fw fa-list-ol"></i>
                 <span>Gestión</span>
             </a>
-            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div id="multiCollapseExample1" class="collapse" aria-labelledby="headingTwo" data-parent="">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="registroUsuarios.php">
+                    <a class="collapse-item" href="usuarios.php">
                         <i class="fas fa-fw fa-users"></i>
                         Usuarios
                     </a>
@@ -97,51 +99,107 @@ if(empty($_SESSION['s_usuario'])){
         <hr class="sidebar-divider">
         <!--Inicio Navegación Propiedad-->
 
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-                <i class="fas fa-fw fa-wrench"></i>
-                <span>Propiedad</span>
-            </a>
-            <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="utilities-color.html">Ovalo</a>
-                    <a class="collapse-item" href="utilities-border.html">Lotes</a>
-                    <a class="collapse-item" href="utilities-animation.html">Horarios</a>
-                </div>
-            </div>
-        </li>
         <!--Inicio Navegación Cartera -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-                <i class="fas fa-fw fa-wrench"></i>
+            <a class="nav-link collapsed" data-toggle="collapse" href="#multiCollapseExample2" role="button" aria-expanded="false" aria-controls="multiCollapseExample2">
+                <i class="fas fa-fw fa-shopping-bag"></i>
                 <span>Cartera</span>
             </a>
-            <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div id="multiCollapseExample2" class="collapse" aria-labelledby="headingUtilities" data-parent="">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <a class="collapse-item" href="utilities-color.html">Gastos</a>
                     <a class="collapse-item" href="utilities-border.html">Cobros</a>
                 </div>
             </div>
         </li>
+        <hr class="sidebar-divider">
         <!--Inicio Navegación Asistencias-->
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-                <i class="fas fa-fw fa-wrench"></i>
+                <i class="fas fa-fw fa-list-alt"></i>
                 <span>Asistencias</span>
             </a>
             <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="utilities-color.html">Mingas</a>
-                    <a class="collapse-item" href="utilities-border.html">Sesiones</a>
+                    <a class="collapse-item" href="utilities-color.html">
+                        <i class="fas fa-fw fa-check-circle"></i>
+                        Mingas
+                    </a>
+                    <a class="collapse-item" href="utilities-border.html">
+                        <i class="fas fa-fw fa-check-circle"></i>
+                        Sesiones
+                    </a>
                 </div>
             </div>
         </li>
+
 
         <!-- Divider -->
         <hr class="sidebar-divider">
 
         <!-- Heading -->
-
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-toggle="collapse" href="#multiCollapseExample4" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
+                <i class="fas fa-fw fa-list-alt"></i>
+                <span>Informes</span>
+            </a>
+            <div id="multiCollapseExample4" class="collapse" aria-labelledby="headingTwo" data-parent="">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="listaUsuarios.php">
+                        <i class="fas fa-fw fa-list-ul"></i>
+                        Listado Usuarios
+                    </a>
+                    <a class="collapse-item" href="listadoClientes.php">
+                        <i class="fas fa-fw fa-list-ul"></i>
+                        Listado Clientes
+                    </a>
+                    <a class="collapse-item" href="listadOvalo.php">
+                        <i class="fas fa-fw fa-list-ul"></i>
+                        Listado Ovalos
+                    </a>
+                    <a class="collapse-item" href="listadoLote.php">
+                        <i class="fas fa-fw fa-list-ul"></i>
+                        Listado Lotes
+                    </a>
+                    <a class="collapse-item" href="listadoRiego.php">
+                        <i class="fas fa-fw fa-list-ul"></i>
+                        Listado Hora de Riego
+                    </a>
+                </div>
+            </div>
+        </li>
+        <hr class="sidebar-divider">
+        <!-- Nav Item - Tables -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-toggle="collapse" href="#multiCollapseExample5" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
+                <i class="fas fa-fw fa-print"></i>
+                <span>Reportes</span>
+            </a>
+            <div id="multiCollapseExample5" class="collapse" aria-labelledby="headingTwo" data-parent="">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="usuarios.php">
+                        <i class="fas fa-fw fa-file-alt"></i>
+                        Reporte Usuarios
+                    </a>
+                    <a class="collapse-item" href="clientes.php">
+                        <i class="fas fa-fw fa-file-alt"></i>
+                        Reporte Clientes
+                    </a>
+                    <a class="collapse-item" href="ovalos.php">
+                        <i class="fas fa-fw fa-file-alt"></i>
+                        Reporte Ovalos
+                    </a>
+                    <a class="collapse-item" href="lotes.php">
+                        <i class="fas fa-fw fa-file-alt"></i>
+                        Reporte Lotes
+                    </a>
+                    <a class="collapse-item" href="hriego.php">
+                        <i class="fas fa-fw fa-file-alt"></i>
+                        Reporte Hora de Riego
+                    </a>
+                </div>
+            </div>
+        </li>
 
         <!-- Nav Item - Pages Collapse Menu -->
 
@@ -152,12 +210,7 @@ if(empty($_SESSION['s_usuario'])){
                 <span>Notificaciones</span></a>
         </li>
 
-        <!-- Nav Item - Tables -->
-        <li class="nav-item">
-            <a class="nav-link" href="tables.html">
-                <i class="fas fa-fw fa-archive"></i>
-                <span>Informes</span></a>
-        </li>
+
 
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
@@ -199,7 +252,7 @@ if(empty($_SESSION['s_usuario'])){
 
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small mr-3 " style="color:#ffffff !important" ><strong><?php echo $_SESSION['s_usuario'] ?></strong></span>
+                            <span class="mr-2 d-none d-lg-inline text-white  mr-3 " style="color:#ffffff !important" ><strong><?php echo $_SESSION['s_usuario'] ?></strong></span>
                             <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
                         </a>
                         <!-- Dropdown - User Information -->

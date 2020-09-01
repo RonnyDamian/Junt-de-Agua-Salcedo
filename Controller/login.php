@@ -3,7 +3,7 @@ session_start();
 
 include_once '../config/conexion.php';
 $objeto = new Conexion();
-$conexion = $objeto->connect();
+$conexion = $objeto->conectar();
 
 //recepción de datos enviados mediante POST desde ajax
 $usuario  = (isset($_POST['usuario'])) ? $_POST['usuario'] : '';

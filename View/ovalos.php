@@ -22,7 +22,7 @@
                 <!-- Card Body -->
                 <div class="card-body">
                     <!--Inicio formulario registro usuarios -->
-                    <form>
+                    <form id="formovalo" onsubmit="return agregarOvalo()" method="post">
                         <div class="row mt-2 mb-4">
                             <div class="col">
                                 <label for="nombre"><strong>Toma</strong></label>
@@ -34,13 +34,13 @@
                             </div>
                             <div class="col">
                                 <label for="cedula"><strong>Canal derivación</strong></label>
-                                <input type="text" class="form-control" name="canal" id="canal" minlength="1" maxlength="3" required="required" onkeypress="return validaNumericos(event) ;">
+                                <input type="text" class="form-control" name="canalDer" id="canalDer" minlength="1" maxlength="3" required="required" onkeypress="return validaNumericos(event) ;">
                             </div>
                         </div>
                         <div class="row mt-2 mb-4">
                             <div class="col">
                                 <label for="covencional"><strong>Sub derivación</strong></label>
-                                <input type="text" class="form-control" name="subderivacipn" id="subderivacipn" minlength="1" maxlength="3" required="required" onkeypress="return validaNumericos(event) ;">
+                                <input type="text" class="form-control" name="subDer" id="subDer" minlength="1" maxlength="3" required="required" onkeypress="return validaNumericos(event) ;">
                             </div>
                             <div class="col">
                                 <label for="direccion"><strong>Dotación</strong></label>
@@ -54,7 +54,7 @@
                         <div class="row">
                             <di class="col-lg-4">
                                 <label for="caudal"><strong>Caudal</strong></label>
-                                <input type="text" class="form-control" name="cadual" id="cadualr" maxlength="1" minlength="6" placeholder="Ej: 0987654321" onkeypress="return validaNumericos(event) ;">
+                                <input type="text" class="form-control" name="caudal" id="caudal" maxlength="1" minlength="6" placeholder="Ej: 0987654321" onkeypress="return validaNumericos(event) ;">
                             </di>
                         </div>
                         <hr>
