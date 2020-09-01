@@ -1,22 +1,13 @@
-/*function mostrar(){
-    $.ajax({
-        url:"../View/listaUsuarios.php",
-        type:"POST",
-        success:function (r) {
-            $("#tablaUsuarios").html(r);
-        }
-    });
-}*/
-
-function agregarOvalo(){
+function agregarCliente(){
 
     $.ajax({
         type:"POST",
-        url:"../Controller/ovalos.php",
-        data: $("#frmovalo").serialize(),
+        url:"../Controller/clientes.php",
+        data: $("#frmCliente").serialize(),
         success:function(r){
+
             if(r==1){
-                $("#frmovalo")[0].reset();
+                $("#frmCliente")[0].reset();
                 setTimeout("location.href='../View/home.php' ", 5600);
                 toastr.options = {
                     "closeButton":true,
@@ -35,7 +26,7 @@ function agregarOvalo(){
                     "showMethod": "fadeIn",
                     "hideMethod": "fadeOut"
                 }
-                toastr["success"]("Ovalo agregado exitosamente", "Guardado con éxito")
+                toastr["success"]("Cliente agregado exitosamente", "Guardado con éxito")
 
             }else if (r==2){
 
@@ -56,7 +47,7 @@ function agregarOvalo(){
                     "showMethod": "fadeIn",
                     "hideMethod": "fadeOut"
                 }
-                toastr["warning"]("El ovalo y/o email ya existe ", "Datos duplicados")
+                toastr["warning"]("El email ya existe ", "Datos duplicados")
 
             }else{
                 toastr.options = {
@@ -76,22 +67,39 @@ function agregarOvalo(){
                     "showMethod": "fadeIn",
                     "hideMethod": "fadeOut"
                 }
-                toastr["error"]("Hubo un error al registrar el ovalo", "Error de regostro")
+                toastr["error"]("Hubo un error al registrar al cliente", "Error de regostro")
             }
         }
     });
     return false;
 }
-
-
-function editarOvalo(){
+function obtenerCliente(idCliente){
     $.ajax({
-        url:"../Controller/editarOvalo.php",
+        url:"../Controller/obtenerCliente.php",
         type:"POST",
-        data:$("#frmovalou").serialize(),
+        data:"idCliente=" +idCliente,
+        success:function (r) {
+            r=JSON.parse(r);
+            $("#nombreu").val(r['nombre']);
+            $("#apellidou").val(r['apellido']);
+            $("#cedulau").val(r['cedula']);
+            $("#sexou").val(r['sexo']);
+            $("#direccionu").val(r['direccion'])
+            $("#celularu").val(r['celular']);
+            $("#emailu").val(r['email']);
+            $("#idCliente").val(r['idCliente']);
+        }
+    });
+}
+
+ function editarCliente(){
+    $.ajax({
+        url:"../Controller/editarCliente.php",
+        type:"POST",
+        data:$("#frmClienteu").serialize(),
         success:function (r) {
             if(r==1){
-                setTimeout("location.href='../View/listadOvalo.php'", 1900);
+                setTimeout("location.href='../View/listadoClientes.php'", 1900);
                 toastr.options = {
                     "closeButton":true,
                     "debug": false,
@@ -109,7 +117,9 @@ function editarOvalo(){
                     "showMethod": "fadeIn",
                     "hideMethod": "fadeOut"
                 }
-                toastr["success"]("Ovalo actualizado exitosamente", "Actualizado con éxito")
+                toastr["success"]("Cliente actualizado exitosamente", "Actualizado con éxito")
+
+
             }else if (r==2){
 
                 toastr.options = {
@@ -129,7 +139,7 @@ function editarOvalo(){
                     "showMethod": "fadeIn",
                     "hideMethod": "fadeOut"
                 }
-                toastr["warning"]("El ovalo y/o email ya existe ", "Datos duplicados")
+                toastr["warning"]("El  email ya existe ", "Datos duplicados")
 
             }else{
                 toastr.options = {
@@ -149,7 +159,7 @@ function editarOvalo(){
                     "showMethod": "fadeIn",
                     "hideMethod": "fadeOut"
                 }
-                toastr["error"]("Error al editar ovalo", "Error de regostro")
+                toastr["error"]("Error al actualizar cliente", "Error de regostro")
             }
 
         }
@@ -158,81 +168,63 @@ function editarOvalo(){
     return false;
 }
 
-function obtenerOvalo(idOvalo){
-    $.ajax({
-        url:"../Controller/obtenerOvalo.php",
-        type:"POST",
-        data:"idOvalo=" +idOvalo,
-        success:function (r) {
-            r=JSON.parse(r);
-            $("#tomau").val(r['toma']);
-            $("#derivacionu").val(r['derivacion']);
-            $("#canalDeru").val(r['canalDer']);
-            $("#subDeru").val(r['subDer']);
-            $("#dotacionu").val(r['dotacion']);
-            $("#superficieu").val(r['superficie'])
-            $("#caudalu").val(r['caudal']);
-            $("#idOvalo").val(r['idOvalo']);
-        }
-    });
-}
-function eliminarOvalo(idOvalo){
+function eliminarCliente(idCliente){
     swal.fire({
         title: "¿Estás seguro de eliminar este registro?",
         text: "!Una vez eliminado no podra recuperarse¡",
-        icon: "warning",
+        type: "warning",
         buttons: true,
         dangerMode: true,
     }).then((willDelete) => {
-        if (willDelete) {
-            $.ajax({
-                type:"POST",
-                url:"../Controller/eliminarOvalo.php",
-                data: "idOvalo=" + idOvalo,
-                success:function(r){
-                    console.log(r);
-                    if(r==1){
-                        setTimeout("location.href='../View/listadOvalo.php'", 1900);
-                        toastr.options = {
-                            "closeButton":true,
-                            "debug": false,
-                            "newestOnTop": true,
-                            "progressBar": false,
-                            "positionClass": "toast-top-center",
-                            "preventDuplicates": true,
-                            "onclick": null,
-                            "showDuration": "100",
-                            "hideDuration": "500",
-                            "timeOut": "2500",
-                            "extendedTimeOut": "500",
-                            "showEasing": "swing",
-                            "hideEasing": "linear",
-                            "showMethod": "fadeIn",
-                            "hideMethod": "fadeOut"
+            if (willDelete) {
+                $.ajax({
+                    type:"POST",
+                    url:"../Controller/eliminarCliente.php",
+                    data: "idCliente="+idCliente,
+                    success:function(r){
+                        console.log(r);
+                        if(r==1){
+                            setTimeout("location.href='../View/listadoClientes.php'", 1900);
+                            toastr.options = {
+                                "closeButton":true,
+                                "debug": false,
+                                "newestOnTop": true,
+                                "progressBar": false,
+                                "positionClass": "toast-top-center",
+                                "preventDuplicates": true,
+                                "onclick": null,
+                                "showDuration": "100",
+                                "hideDuration": "500",
+                                "timeOut": "2500",
+                                "extendedTimeOut": "500",
+                                "showEasing": "swing",
+                                "hideEasing": "linear",
+                                "showMethod": "fadeIn",
+                                "hideMethod": "fadeOut"
+                            }
+                            toastr["success"]("Cliente eliminado exitosamente", "Registro eliminado")
+                        }else{
+                            toastr.options = {
+                                "closeButton":true,
+                                "debug": false,
+                                "newestOnTop": true,
+                                "progressBar": true,
+                                "positionClass": "toast-top-center",
+                                "preventDuplicates": true,
+                                "onclick": null,
+                                "showDuration": "300",
+                                "hideDuration": "1000",
+                                "timeOut": "5000",
+                                "extendedTimeOut": "1000",
+                                "showEasing": "swing",
+                                "hideEasing": "linear",
+                                "showMethod": "fadeIn",
+                                "hideMethod": "fadeOut"
+                            }
+                            toastr["error"]("Error al eliminar el cliente", "Error de eliminación")
                         }
-                        toastr["success"]("Usuario eliminado exitosamente", "Registro eliminado")
-                    }else{
-                        toastr.options = {
-                            "closeButton":true,
-                            "debug": false,
-                            "newestOnTop": true,
-                            "progressBar": true,
-                            "positionClass": "toast-top-center",
-                            "preventDuplicates": true,
-                            "onclick": null,
-                            "showDuration": "300",
-                            "hideDuration": "1000",
-                            "timeOut": "5000",
-                            "extendedTimeOut": "1000",
-                            "showEasing": "swing",
-                            "hideEasing": "linear",
-                            "showMethod": "fadeIn",
-                            "hideMethod": "fadeOut"
-                        }
-                        toastr["error"]("Error al eliminar Ovalo", "Error de eliminación")
                     }
-                }
-            });
-        }
-    });
+                });
+            }
+        });
 }

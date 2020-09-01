@@ -22,11 +22,11 @@
                 <!-- Card Body -->
                 <div class="card-body">
                     <!--Inicio formulario registro usuarios -->
-                    <form id="formovalo" onsubmit="return agregarOvalo()" method="post">
+                    <form id="frmovalo" onsubmit="return agregarOvalo()" method="post">
                         <div class="row mt-2 mb-4">
                             <div class="col">
                                 <label for="nombre"><strong>Toma</strong></label>
-                                <input type="text" class="form-control" name="toma" id="toma" minlength="1" maxlength="3" required="required"  onkeypress="return validaLetras(event);">
+                                <input type="text" class="form-control" name="toma" id="toma" minlength="1" maxlength="3" required="required" >
                             </div>
                             <div class="col">
                                 <label for="apellido"><strong>Derivación</strong></label>
@@ -34,13 +34,13 @@
                             </div>
                             <div class="col">
                                 <label for="cedula"><strong>Canal derivación</strong></label>
-                                <input type="text" class="form-control" name="canalDer" id="canalDer" minlength="1" maxlength="3" required="required" onkeypress="return validaNumericos(event) ;">
+                                <input type="text" class="form-control" name="canalDer" id="canalDer" minlength="1" maxlength="3" required="required">
                             </div>
                         </div>
                         <div class="row mt-2 mb-4">
                             <div class="col">
                                 <label for="covencional"><strong>Sub derivación</strong></label>
-                                <input type="text" class="form-control" name="subDer" id="subDer" minlength="1" maxlength="3" required="required" onkeypress="return validaNumericos(event) ;">
+                                <input type="text" class="form-control" name="subDer" id="subDer" minlength="1" maxlength="3" required="required" >
                             </div>
                             <div class="col">
                                 <label for="direccion"><strong>Dotación</strong></label>
@@ -48,13 +48,13 @@
                             </div>
                             <di class="col">
                                 <label for="celular"><strong>Superficie</strong></label>
-                                <input type="text" class="form-control" name="superficie" id="superficier" maxlength="1" minlength="6" placeholder="Ej: 0987654321" onkeypress="return validaNumericos(event) ;">
+                                <input type="text" class="form-control" name="superficie" id="superficier" maxlength="6" minlength="1">
                             </di>
                         </div>
                         <div class="row">
                             <di class="col-lg-4">
                                 <label for="caudal"><strong>Caudal</strong></label>
-                                <input type="text" class="form-control" name="caudal" id="caudal" maxlength="1" minlength="6" placeholder="Ej: 0987654321" onkeypress="return validaNumericos(event) ;">
+                                <input type="text" class="form-control" name="caudal" id="caudal" maxlength="6" minlength="1">
                             </di>
                         </div>
                         <hr>

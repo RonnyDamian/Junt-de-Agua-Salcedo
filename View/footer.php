@@ -67,7 +67,8 @@
 <!-- Page level custom scripts -->
 <script src="../public/js/demo/datatables-demo.js"></script>
 <script src="../js/usuarios.js"></script>
-
+<script src="../js/ovalos.js"></script>
+<script src="../js/clientes.js"></script>
 
 <!-- Core plugin JavaScript-->
 

@@ -1,25 +1,19 @@
 <?php
- require_once ("../Model/Usuario.php");
+ require_once ("../Model/Ovalo.php");
 
- $obj = new Usuario();
-
+ $obj = new Ovalo();
  $data= array(
-     "nombre"=>$_POST['nombre'],
-     "apellido"=>$_POST['apellido'],
-     "cedula"=>$_POST['cedula'],
-     "telefono"=>$_POST['telefono'],
-     "celular"=>$_POST['celular'],
-     "direccion"=>$_POST['direccion'],
-     "email"=>$_POST['email'],
-     "usuario"=>$_POST['usuario'],
-     "password"=>$_POST['password']
+     "toma"=>$_POST['toma'],
+     "derivacion"=>$_POST['derivacion'],
+     "canalDer"=>$_POST['canalDer'],
+     "subDer"=>$_POST['subDer'],
+     "dotacion"=>$_POST['dotacion'],
+     "superficie"=>$_POST['superficie'],
+     "caudal"=>$_POST['caudal']
  );
 
-$result=$obj->validaEmail_Usuario($data);
-if(is_array($result)==true and count($result)==0){
-    echo  $obj->agregarUsuario($data);
-}else{
-    echo 2;
-}
+ echo  $obj->agregarOvalo($data);
+
+
 
 ?>

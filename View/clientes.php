@@ -25,11 +25,11 @@
                 <!-- Card Body -->
                 <div class="card-body">
                     <!--Inicio formulario registro usuarios -->
-                    <form>
+                    <form id="frmCliente" method="post" onsubmit="return agregarCliente()">
                         <div class="row mt-2 mb-4">
                             <div class="col">
                                 <label for="nombre"><strong>Nombre</strong></label>
-                                <input type="text" class="form-control" name="nombre" id="nombre" minlength="3" maxlength="70" required="required"  onkeypress="return validaLetras(event);">
+                                <input type="text" class="form-control" name="nombre" id="nombre" minlength="3" maxlength="70" required="required" >
                             </div>
                             <div class="col">
                                 <label for="apellido"><strong>Apellido</strong></label>
@@ -51,7 +51,7 @@
                             </div>
                             <div class="col">
                                 <label for="direccion"><strong>Dirección domiciliaria</strong></label>
-                                <input type="text" class="form-control" name="direccion" id="direccion" maxlength="100" min="3" required="required">
+                                <input type="text" class="form-control" name="direccion" id="direccion"  minlength="3"  maxlength="100" required="required">
                             </div>
                             <di class="col">
                                 <label for="celular"><strong>Número celular</strong></label>

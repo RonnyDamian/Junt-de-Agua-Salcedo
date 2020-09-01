@@ -1,6 +1,9 @@
+/*Creación de la base de datos*/
 DROP DATABASE IF EXISTS juntaauga;
 CREATE DATABASE IF NOT EXISTS juntaauga;
 USE juntaauga;
+
+/*Creación de la tabla Usuarios*/
 DROP TABLE IF EXISTS  usuarios;
 CREATE TABLE IF NOT EXISTS  usuarios
 
@@ -18,6 +21,8 @@ clave VARCHAR(75)
 
 )ENGINE=INNODB DEFAULT CHARACTER ='utf8';
 
+
+/*Creacion de la tabla Ovalos*/
 DROP TABLE IF EXISTS  ovalos;
 CREATE TABLE IF NOT EXISTS  ovalos
 
@@ -32,3 +37,17 @@ superficie VARCHAR(100) NOT NULL,
 caudal VARCHAR(100) NOT NULL
 )ENGINE=INNODB DEFAULT CHARSET ='utf8';
 
+/*Creación de la tabla clientes*/
+DROP TABLE IF EXISTS  t_clientes;
+CREATE TABLE IF NOT EXISTS  t_clientes
+
+(
+idCliente INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+nombre VARCHAR(75) NOT NULL,
+apellido VARCHAR(75) NOT NULL,
+cedula VARCHAR(10) NOT NULL,
+sexo VARCHAR(10) NOT NULL ,
+direccion VARCHAR(100) NOT NULL,
+celular VARCHAR(10) DEFAULT  NULL,
+email VARCHAR(100) NOT NULL,
+)ENGINE=INNODB DEFAULT CHARSET ='utf8';

@@ -73,13 +73,13 @@ if(empty($_SESSION['s_usuario'])){
                         <i class="fas fa-fw fa-users"></i>
                         Usuarios
                     </a>
-                    <a class="collapse-item" href="clientes.php">
-                        <i class="fas fa-fw fa-users"></i>
-                        Clientes
-                    </a>
                     <a class="collapse-item" href="ovalos.php">
                         <i class="fas fa-fw fa-square"></i>
                         Ovalos
+                    </a>
+                    <a class="collapse-item" href="clientes.php">
+                        <i class="fas fa-fw fa-users"></i>
+                        Clientes
                     </a>
                     <a class="collapse-item" href="lotes.php">
                         <i class="fas fa-fw fa-building"></i>
@@ -97,8 +97,38 @@ if(empty($_SESSION['s_usuario'])){
             </div>
         </li>
         <hr class="sidebar-divider">
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-toggle="collapse" href="#multiCollapseExample4" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
+                <i class="fas fa-fw fa-list-alt"></i>
+                <span>Informes</span>
+            </a>
+            <div id="multiCollapseExample4" class="collapse" aria-labelledby="headingTwo" data-parent="">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="listaUsuarios.php">
+                        <i class="fas fa-fw fa-list-ul"></i>
+                        Listado Usuarios
+                    </a>
+                    <a class="collapse-item" href="listadoClientes.php">
+                        <i class="fas fa-fw fa-list-ul"></i>
+                        Listado Clientes
+                    </a>
+                    <a class="collapse-item" href="listadOvalo.php">
+                        <i class="fas fa-fw fa-list-ul"></i>
+                        Listado Ovalos
+                    </a>
+                    <a class="collapse-item" href="listadoLote.php">
+                        <i class="fas fa-fw fa-list-ul"></i>
+                        Listado Lotes
+                    </a>
+                    <a class="collapse-item" href="listadoRiego.php">
+                        <i class="fas fa-fw fa-list-ul"></i>
+                        Listado Hora de Riego
+                    </a>
+                </div>
+            </div>
+        </li>
         <!--Inicio Navegación Propiedad-->
-
+        <hr class="sidebar-divider">
         <!--Inicio Navegación Cartera -->
         <li class="nav-item">
             <a class="nav-link collapsed" data-toggle="collapse" href="#multiCollapseExample2" role="button" aria-expanded="false" aria-controls="multiCollapseExample2">
@@ -133,41 +163,6 @@ if(empty($_SESSION['s_usuario'])){
             </div>
         </li>
 
-
-        <!-- Divider -->
-        <hr class="sidebar-divider">
-
-        <!-- Heading -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" data-toggle="collapse" href="#multiCollapseExample4" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
-                <i class="fas fa-fw fa-list-alt"></i>
-                <span>Informes</span>
-            </a>
-            <div id="multiCollapseExample4" class="collapse" aria-labelledby="headingTwo" data-parent="">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="listaUsuarios.php">
-                        <i class="fas fa-fw fa-list-ul"></i>
-                        Listado Usuarios
-                    </a>
-                    <a class="collapse-item" href="listadoClientes.php">
-                        <i class="fas fa-fw fa-list-ul"></i>
-                        Listado Clientes
-                    </a>
-                    <a class="collapse-item" href="listadOvalo.php">
-                        <i class="fas fa-fw fa-list-ul"></i>
-                        Listado Ovalos
-                    </a>
-                    <a class="collapse-item" href="listadoLote.php">
-                        <i class="fas fa-fw fa-list-ul"></i>
-                        Listado Lotes
-                    </a>
-                    <a class="collapse-item" href="listadoRiego.php">
-                        <i class="fas fa-fw fa-list-ul"></i>
-                        Listado Hora de Riego
-                    </a>
-                </div>
-            </div>
-        </li>
         <hr class="sidebar-divider">
         <!-- Nav Item - Tables -->
         <li class="nav-item">

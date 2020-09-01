@@ -28,12 +28,14 @@
                                 <label for="nombre"><strong>Cliente</strong></label>
                                 <select name="cliente" id="cliente" class="form-control">
                                     <option value="" selected="selected" disabled="disabled">--Seleccione una opción--</option>
-                                    <option value="hombre">Hombre</option>
-                                    <option value="mujer">Mujer</option>
-                                    <option value="hombre">Hombre</option>
-                                    <option value="mujer">Mujer</option>
-                                    <option value="hombre">Hombre</option>
-                                    <option value="mujer">Mujer</option>
+                                    <?php
+                                       require_once("../Model/Cliente.php");
+                                       $obj=new Cliente();
+                                       $data=$obj->mostrarClientesConcat();
+                                       foreach ($data as $value):
+                                    ?>
+                                    <option value="<?php echo $value['nombreApellido']?>"><?php echo $value['nombreApellido']?></option>
+                                    <?php endforeach;?>
                                 </select>
                             </div>
                             <div class="col">
@@ -49,7 +51,7 @@
                         <div class="row mt-2 mb-4">
                             <div class="col">
                                 <label for="celular"><strong>Superficie</strong></label>
-                                <input type="text" class="form-control" name="superficie" id="superficier" maxlength="1" minlength="6" placeholder="Ej: 0987654321" onkeypress="return validaNumericos(event) ;">
+                                <input type="text" class="form-control" name="superficie" id="superficier" maxlength="1" minlength="6"  onkeypress="return validaNumericos(event) ;">
                             </div>
                             <div class="col">
                                 <label for="celular"><strong>Precio</strong></label>
@@ -58,18 +60,20 @@
                                  a partir de la formula
                                  (superficie/10000)-->
 
-                                <input type="text" class="form-control" name="superficie" id="superficier" maxlength="1" minlength="6" placeholder="Ej: 0987654321" onkeypress="return validaNumericos(event) ;">
+                                <input type="text" class="form-control" name="superficie" id="superficier" maxlength="1" minlength="6"  onkeypress="return validaNumericos(event) ;">
                             </div>
                             <div class="col">
                                 <label for="direccion"><strong>Número de ovalo</strong></label>
                                 <select name="numOvalo" id="numOvalo" class="form-control">
                                     <option value="" selected="selected" disabled="disabled">--Seleccione una opción--</option>
-                                    <option value="hombre">Hombre</option>
-                                    <option value="mujer">Mujer</option>
-                                    <option value="hombre">Hombre</option>
-                                    <option value="mujer">Mujer</option>
-                                    <option value="hombre">Hombre</option>
-                                    <option value="mujer">Mujer</option>
+                                    <?php
+                                    require_once("../Model/Ovalo.php");
+                                    $obj=new Ovalo();
+                                    $data=$obj->mostrarOvaloConcat();
+                                    foreach ($data as $value):
+                                        ?>
+                                        <option value="<?php echo $value['numeroOvalo']?>"><?php echo $value['numeroOvalo']?></option>
+                                    <?php endforeach;?>
                                 </select>
                             </div>
                         </div>

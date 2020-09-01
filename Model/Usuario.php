@@ -1,7 +1,7 @@
  <?php
 
  require_once("../config/Conexion.php");
-
+error_reporting(0);
 
  class Usuario extends Conexion{
 

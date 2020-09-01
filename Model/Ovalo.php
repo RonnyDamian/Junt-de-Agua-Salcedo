@@ -22,7 +22,7 @@
          $sql=Conexion::conectar()->prepare($sql);
          $sql->bindValue(1, $data['toma'], PDO::PARAM_STR);
          $sql->bindValue(2, $data['derivacion'], PDO::PARAM_STR);
-         $sql->bindValue(3, $data['cenalDer'], PDO::PARAM_STR);
+         $sql->bindValue(3, $data['canalDer'], PDO::PARAM_STR);
          $sql->bindValue(4, $data['subDer'], PDO::PARAM_STR);
          $sql->bindValue(5, $data['dotacion'], PDO::PARAM_STR);
          $sql->bindValue(6, $data['superficie'], PDO::PARAM_STR);
@@ -30,51 +30,60 @@
          $query=$sql->execute();
         return $query;
      }
-     public function mostrarUsuarios(){
-         $sql="SELECT * FROM t_usuarios";
+     public function mostrarOvalo(){
+         $sql="SELECT * FROM t_ovalos";
          $sql=Conexion::conectar()->prepare($sql);
          $sql->execute();
          $query=$sql->fetchAll();
          return $query;
      }
-     public static function obtenerUsuario($idUsuario){
-         $sql="SELECT * FROM t_usuarios WHERE idUsuario=?";
+
+     public function mostrarOvaloConcat(){
+         $sql="SELECT CONCAT(toma,'-',derivacion,'-',canalDer,'-',subDer) AS numeroOvalo FROM t_ovalos;";
          $sql=Conexion::conectar()->prepare($sql);
-         $sql->bindValue(1,$idUsuario, PDO::PARAM_INT);
+         $sql->execute();
+         $query=$sql->fetchAll();
+         return $query;
+     }
+     public static function obtenerOvalo($idOvalo){
+         $sql="SELECT * FROM t_ovalos WHERE idOvalo=?";
+         $sql=Conexion::conectar()->prepare($sql);
+         $sql->bindValue(1,$idOvalo, PDO::PARAM_INT);
          $sql->execute();
          $query=$sql->fetch();
          return $query;
      }
 
-     public function editarUsuario($data){
-         $sql="UPDATE t_usuarios
-              SET nombre=?,
-                  apellido=?,
-                  cedula=?,
-                  telefono=?,
-                  celular=?,
-                  direccion=?,
-                  email=?
+     public function editarOvalo($data){
+         $sql="UPDATE t_ovalos
+              SET toma=?,
+                  derivacion=?,
+                  canalDer=?,
+                  subDer=?,
+                  dotacion=?,
+                  superficie=?,
+                  caudal=?
              WHERE 
-                  idUsuario=?";
+                  idOvalo=?";
          $sql=Conexion::conectar()->prepare($sql);
-         $sql->bindValue(1, $data['nombre'], PDO::PARAM_STR);
-         $sql->bindValue(2, $data['apellido'], PDO::PARAM_STR);
-         $sql->bindValue(3, $data['cedula'], PDO::PARAM_STR);
-         $sql->bindValue(4, $data['telefono'], PDO::PARAM_STR);
-         $sql->bindValue(5, $data['celular'], PDO::PARAM_STR);
-         $sql->bindValue(6, $data['direccion'], PDO::PARAM_STR);
-         $sql->bindValue(7, $data['email'], PDO::PARAM_STR);
-         $sql->bindValue(8, $data['idUsuario'], PDO::PARAM_INT);
+         $sql->bindValue(1, $data['toma'], PDO::PARAM_STR);
+         $sql->bindValue(2, $data['derivacion'], PDO::PARAM_STR);
+         $sql->bindValue(3, $data['canalDer'], PDO::PARAM_STR);
+         $sql->bindValue(4, $data['subDer'], PDO::PARAM_STR);
+         $sql->bindValue(5, $data['dotacion'], PDO::PARAM_STR);
+         $sql->bindValue(6, $data['superficie'], PDO::PARAM_STR);
+         $sql->bindValue(7, $data['caudal'], PDO::PARAM_STR);
+         $sql->bindValue(8, $data['idOvalo'], PDO::PARAM_INT);
          $query=$sql->execute();
          return $query;
      }
-     public static function eliminarUsuario($idUsuario){
-         $sql="DELETE FROM t_usuarios WHERE idUsuario=?";
+     public static function eliminarOvalo($idOvalo){
+         $sql="DELETE FROM t_ovalos WHERE idOvalo=?";
          $query=Conexion::conectar()->prepare($sql);
-         $query->bindValue(1,$idUsuario, PDO::PARAM_INT);
+         $query->bindValue(1,$idOvalo, PDO::PARAM_INT);
          return $query->execute();
      }
+
 
 
  }
