@@ -47,7 +47,27 @@ function agregarCliente(){
                     "showMethod": "fadeIn",
                     "hideMethod": "fadeOut"
                 }
-                toastr["warning"]("El email ya existe ", "Datos duplicados")
+                toastr["warning"]("El email y/o cédula introducido ya existe ", "Datos duplicados")
+
+            }else if (r==3){
+                toastr.options = {
+                    "closeButton":true,
+                    "debug": false,
+                    "newestOnTop": true,
+                    "progressBar": true,
+                    "positionClass": "toast-top-center",
+                    "preventDuplicates": true,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
+                toastr["warning"]("El número de cédula introducido no es válido", "Cédula incorrecta")
 
             }else{
                 toastr.options = {
