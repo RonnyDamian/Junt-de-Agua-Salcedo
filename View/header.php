@@ -26,6 +26,7 @@ if(empty($_SESSION['s_usuario'])){
     <link href="../public/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../public/toast/toastr.min.css">
     <link rel="stylesheet" href="../public/sweetalert2/sweetalert2.min.css">
+    <link rel="stylesheet" href="../public/css/select2.min.css">
 
 </head>
 

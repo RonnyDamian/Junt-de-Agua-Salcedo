@@ -39,7 +39,7 @@
      }
 
      public function mostrarOvaloConcat(){
-         $sql="SELECT CONCAT(toma,'-',derivacion,'-',canalDer,'-',subDer) AS numeroOvalo FROM t_ovalos;";
+         $sql="SELECT idOvalo, CONCAT(toma,'-',derivacion,'-',canalDer,'-',subDer) AS numeroOvalo FROM t_ovalos;";
          $sql=Conexion::conectar()->prepare($sql);
          $sql->execute();
          $query=$sql->fetchAll();

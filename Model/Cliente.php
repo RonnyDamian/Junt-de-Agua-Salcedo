@@ -38,7 +38,7 @@ error_reporting(0);
      }
 
      public function mostrarClientesConcat(){
-         $sql="SELECT CONCAT(nombre,' ',apellido) AS nombreApellido FROM t_clientes";
+         $sql="SELECT idCliente, CONCAT(nombre,' ',apellido) AS nombreApellido, idCLiente FROM t_clientes";
          $sql=Conexion::conectar()->prepare($sql);
          $sql->execute();
          $query=$sql->fetchAll();

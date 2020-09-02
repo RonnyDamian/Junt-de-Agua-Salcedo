@@ -22,11 +22,11 @@
                 <!-- Card Body -->
                 <div class="card-body">
                     <!--Inicio formulario registro usuarios -->
-                    <form>
+                    <form id="frmLote" onsubmit="return agregarLote()" method="post">
                         <div class="row mt-2 mb-4">
                             <div class="col">
                                 <label for="nombre"><strong>Cliente</strong></label>
-                                <select name="cliente" id="cliente" class="form-control">
+                                <select name="idCliente" id="idCliente" class="form-control">
                                     <option value="" selected="selected" disabled="disabled">--Seleccione una opción--</option>
                                     <?php
                                        require_once("../Model/Cliente.php");
@@ -34,45 +34,36 @@
                                        $data=$obj->mostrarClientesConcat();
                                        foreach ($data as $value):
                                     ?>
-                                    <option value="<?php echo $value['nombreApellido']?>"><?php echo $value['nombreApellido']?></option>
+                                    <option value="<?php echo $value['idCliente']?>"><?php echo $value['nombreApellido']?></option>
                                     <?php endforeach;?>
                                 </select>
                             </div>
                             <div class="col">
-                                <label for="apellido"><strong>Clave</strong></label>
-                                <input type="text" class="form-control" name="claveLote" id="claveLote" minlength="1" maxlength="7" required="required" onkeypress="return validaNumericos(event) ;">
+                                <label for="clave"><strong>Clave</strong></label>
+                                <input type="text" class="form-control" name="clave" id="clave" minlength="1" maxlength="7" required="required" onkeypress="return validaNumericos(event) ;">
                             </div>
                             <div class="col">
-                                <label for="apellido"><strong>Númeor de Lote</strong></label>
+                                <label for="numLote"><strong>Númeor de Lote</strong></label>
                                 <input type="text" class="form-control" name="numLote" id="numLote" minlength="1" maxlength="7" required="required" onkeypress="return validaNumericos(event) ;">
                             </div>
 
                         </div>
                         <div class="row mt-2 mb-4">
-                            <div class="col">
-                                <label for="celular"><strong>Superficie</strong></label>
-                                <input type="text" class="form-control" name="superficie" id="superficier" maxlength="1" minlength="6"  onkeypress="return validaNumericos(event) ;">
+                            <div class="col-lg-4">
+                                <label for="superficier"><strong>Superficie</strong></label>
+                                <input type="text" class="form-control" name="superficie" id="superficier" maxlength="6" minlength="1"  onkeypress="return validaNumericos(event) ;">
                             </div>
-                            <div class="col">
-                                <label for="celular"><strong>Precio</strong></label>
-
-                                <!--El valor se obtiene
-                                 a partir de la formula
-                                 (superficie/10000)-->
-
-                                <input type="text" class="form-control" name="superficie" id="superficier" maxlength="1" minlength="6"  onkeypress="return validaNumericos(event) ;">
-                            </div>
-                            <div class="col">
+                            <div class="col-lg-4">
                                 <label for="direccion"><strong>Número de ovalo</strong></label>
-                                <select name="numOvalo" id="numOvalo" class="form-control">
-                                    <option value="" selected="selected" disabled="disabled">--Seleccione una opción--</option>
+                                <select name="idOvalo" id="idOvalo" class="form-control">
+                                    <option value="" selected="selected" disabled="disabled" class="select select2">--Seleccione una opción--</option>
                                     <?php
                                     require_once("../Model/Ovalo.php");
                                     $obj=new Ovalo();
                                     $data=$obj->mostrarOvaloConcat();
                                     foreach ($data as $value):
                                         ?>
-                                        <option value="<?php echo $value['numeroOvalo']?>"><?php echo $value['numeroOvalo']?></option>
+                                        <option value="<?php echo $value['idOvalo']?>"><?php echo $value['numeroOvalo']?></option>
                                     <?php endforeach;?>
                                 </select>
                             </div>
@@ -99,6 +90,11 @@
         </div>
     </div>
 
+    <script>
+        $(document).ready(funciton(){
+                $("#numOvalo").select2();
+        });
+    </script>
 
 <!--Fin Página Lotes -->
 
