@@ -27,6 +27,8 @@ if(empty($_SESSION['s_usuario'])){
     <link rel="stylesheet" href="../public/toast/toastr.min.css">
     <link rel="stylesheet" href="../public/sweetalert2/sweetalert2.min.css">
     <link rel="stylesheet" href="../public/css/select2.min.css">
+    <link rel="stylesheet" href="../public/datepicker/clockpicker.css">
+
 
 </head>
 
@@ -138,8 +140,14 @@ if(empty($_SESSION['s_usuario'])){
             </a>
             <div id="multiCollapseExample2" class="collapse" aria-labelledby="headingUtilities" data-parent="">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="utilities-color.html">Gastos</a>
-                    <a class="collapse-item" href="utilities-border.html">Cobros</a>
+                    <a class="collapse-item" href="utilities-color.html">
+                        <i class="fas fa-fw fa-coins"></i>
+                        Gastos
+                    </a>
+                    <a class="collapse-item" href="utilities-border.html">
+                        <i class="fas fa-fw fa-money-bill"></i>
+                        Cobros
+                    </a>
                 </div>
             </div>
         </li>

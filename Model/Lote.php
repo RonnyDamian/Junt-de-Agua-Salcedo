@@ -1,20 +1,19 @@
  <?php
-
  require_once("../config/Conexion.php");
+ error_reporting(0);
 
 
  class Lote extends Conexion{
 
 
-     /*public static function validaEmail_Usuario($data){
-         $sql ="SELECT * FROM t_usuarios WHERE email=? or usuario=?";
+     public static function valida_Lote_Repetido($data){
+         $sql ="SELECT * FROM t_lotes WHERE clave=?";
          $sql=Conexion::conectar()->prepare($sql);
-         $sql->bindValue(1,$data['email'],PDO::PARAM_STR);
-         $sql->bindValue(2,$data['usuario'],PDO::PARAM_STR);
+         $sql->bindValue(1,$data['clave'],PDO::PARAM_STR);
          $sql->execute();
          $query=$sql->fetchAll(PDO::FETCH_ASSOC);
          return $query;
-     }*/
+     }
 
      public static function agregarLote($data){
          $sql="INSERT INTO t_lotes (clave,numLote,superficie,precio,idCliente,idOvalo)
@@ -30,6 +29,13 @@
          $sql->bindValue(5, $data['idCliente'], PDO::PARAM_INT);
          $sql->bindValue(6, $data['idOvalo'], PDO::PARAM_INT);
          $query=$sql->execute();
+        return $query;
+     }
+     public function mostrarLoteConcat(){
+        $sql="SELECT clave FROM t_lotes ";
+        $sql=Conexion::conectar()->prepare($sql);
+        $sql->execute();
+        $query=$sql->fetchAll();
         return $query;
      }
      public function mostrarLote(){

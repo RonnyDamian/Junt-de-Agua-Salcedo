@@ -37,6 +37,25 @@ function agregarLote(){
                 }
                 toastr["success"]("Lote agregado exitosamente", "Guardado con éxito")
 
+            }else if(r==2){
+                toastr.options = {
+                    "closeButton":true,
+                    "debug": false,
+                    "newestOnTop": true,
+                    "progressBar": true,
+                    "positionClass": "toast-top-center",
+                    "preventDuplicates": true,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
+                toastr["warning"]("La clave de lote introducida ya existe", "Datos Duplicados")
             }else{
                 toastr.options = {
                     "closeButton":true,

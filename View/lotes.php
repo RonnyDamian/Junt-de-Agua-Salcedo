@@ -39,7 +39,7 @@
                                 </select>
                             </div>
                             <div class="col">
-                                <label for="clave"><strong>Clave</strong></label>
+                                <label for="clave"><strong>Clave de Lote</strong></label>
                                 <input type="text" class="form-control" name="clave" id="clave" minlength="1" maxlength="7" required="required" onkeypress="return validaNumericos(event) ;">
                             </div>
                             <div class="col">
@@ -89,6 +89,7 @@
             </div>
         </div>
     </div>
+
 
     <script>
         $(document).ready(funciton(){

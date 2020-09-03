@@ -47,7 +47,7 @@
 <script src="../public/toast/alertNotification.js"></script>
 <script src="../public/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="../public/sweetalert2/sweetalert2.all.min.js"></script>
-<script src="../public/js/select2.min.js"></script>
+
 
 <!-- Core plugin JavaScript-->
 <script src="../public/vendor/jquery-easing/jquery.easing.min.js"></script>
@@ -63,6 +63,8 @@
 <script src="../public/js/demo/chart-pie-demo.js"></script>
 <script src="../public/vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="../public/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script src="../public/js/select2.min.js"></script>
+<script src="../public/datepicker/clockpicker.js"></script>
 
 <!-- Page level custom scripts -->
 <script src="../public/js/demo/datatables-demo.js"></script>
@@ -70,6 +72,8 @@
 <script src="../js/ovalos.js"></script>
 <script src="../js/clientes.js"></script>
 <script src="../js/lotes.js"></script>
+<script src="../js/horaRiego.js"></script>
+<script src="../js/select2.js"></script>
 <!-- Core plugin JavaScript-->
 
 
