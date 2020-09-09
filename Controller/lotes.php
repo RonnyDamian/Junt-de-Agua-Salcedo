@@ -10,7 +10,7 @@
      "idOvalo"=>$_POST['idOvalo']
  );
 
-$result=$obj->valida_Lote_Repetido($data);
+$result=$obj->valida_clave_numLote_Repetido($data);
 if(is_array($result)==true and count($result)==0){
  echo $obj->agregarLote($data);
 }else{

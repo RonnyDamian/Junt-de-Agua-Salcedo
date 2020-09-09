@@ -6,10 +6,11 @@
  class Lote extends Conexion{
 
 
-     public static function valida_Lote_Repetido($data){
-         $sql ="SELECT * FROM t_lotes WHERE clave=?";
+     public static function valida_clave_numLote_Repetido($data){
+         $sql ="SELECT * FROM t_lotes WHERE clave=? OR numLote=?";
          $sql=Conexion::conectar()->prepare($sql);
          $sql->bindValue(1,$data['clave'],PDO::PARAM_STR);
+         $sql->bindValue(2,$data['numLote'],PDO::PARAM_STR);
          $sql->execute();
          $query=$sql->fetchAll(PDO::FETCH_ASSOC);
          return $query;
@@ -32,7 +33,7 @@
         return $query;
      }
      public function mostrarLoteConcat(){
-        $sql="SELECT clave FROM t_lotes ";
+        $sql="SELECT idLote, clave FROM t_lotes ";
         $sql=Conexion::conectar()->prepare($sql);
         $sql->execute();
         $query=$sql->fetchAll();
@@ -115,6 +116,17 @@
          return $query->execute();
      }
 
+    public static function capturaNumLote($idLote){
+
+         $sql ="SELECT numLote FROM t_lotes WHERE idLote=?";
+         $sql=Conexion::conectar()->prepare($sql);
+         $sql->bindValue(1,$idLote, PDO::PARAM_INT);
+         $sql->execute();
+         $query=$sql->fetch();
+         $data=$query[0];
+         echo $data;
+         die();
+    }
 
 
  }

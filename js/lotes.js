@@ -55,7 +55,7 @@ function agregarLote(){
                     "showMethod": "fadeIn",
                     "hideMethod": "fadeOut"
                 }
-                toastr["warning"]("La clave de lote introducida ya existe", "Datos Duplicados")
+                toastr["warning"]("La clave de lote y/o nuúmero de lote introducido ya existe", "Datos Duplicados")
             }else{
                 toastr.options = {
                     "closeButton":true,

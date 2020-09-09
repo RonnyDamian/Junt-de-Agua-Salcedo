@@ -2,12 +2,12 @@ function agregarHoraRiego(){
 
     $.ajax({
         type:"POST",
-        url:"../Controller/clientes.php",
-        data: $("#frmCliente").serialize(),
+        url:"../Controller/horaRiego.php",
+        data: $("#frmHR").serialize(),
         success:function(r){
 
             if(r==1){
-                $("#frmCliente")[0].reset();
+                $("#frmHR")[0].reset();
                 setTimeout("location.href='../View/home.php' ", 5600);
                 toastr.options = {
                     "closeButton":true,
@@ -26,7 +26,7 @@ function agregarHoraRiego(){
                     "showMethod": "fadeIn",
                     "hideMethod": "fadeOut"
                 }
-                toastr["success"]("Cliente agregado exitosamente", "Guardado con éxito")
+                toastr["success"]("Hora de riego agregado exitosamente", "Guardado con éxito")
 
             }else if (r==2){
 
@@ -47,9 +47,9 @@ function agregarHoraRiego(){
                     "showMethod": "fadeIn",
                     "hideMethod": "fadeOut"
                 }
-                toastr["warning"]("El email y/o cédula introducido ya existe ", "Datos duplicados")
+                toastr["warning"]("La hora fin debe ser mayor a la hora inicio", "Horas Incorrectas")
 
-            }else if (r==3){
+            }else if(r==3){
                 toastr.options = {
                     "closeButton":true,
                     "debug": false,
@@ -67,7 +67,7 @@ function agregarHoraRiego(){
                     "showMethod": "fadeIn",
                     "hideMethod": "fadeOut"
                 }
-                toastr["warning"]("El número de cédula introducido no es válido", "Cédula incorrecta")
+                toastr["warning"]("El número de horas de riego del día 1 debe coincidir con el número de horas de riego del día 2", "Horas de riego desiguales")
 
             }else{
                 toastr.options = {
@@ -87,39 +87,42 @@ function agregarHoraRiego(){
                     "showMethod": "fadeIn",
                     "hideMethod": "fadeOut"
                 }
-                toastr["error"]("Hubo un error al registrar al cliente", "Error de regostro")
+                toastr["error"]("Hubo un error al registrar la hora de riego", "Error de regostro")
             }
         }
     });
     return false;
 }
-function obtenerCliente(idCliente){
+function obtenerHoraRiego(idHoraRiego){
     $.ajax({
-        url:"../Controller/obtenerCliente.php",
+        url:"../Controller/obtenerHoraRiego.php",
         type:"POST",
-        data:"idCliente=" +idCliente,
+        data:"idHoraRiego=" +idHoraRiego,
         success:function (r) {
             r=JSON.parse(r);
-            $("#nombreu").val(r['nombre']);
-            $("#apellidou").val(r['apellido']);
-            $("#cedulau").val(r['cedula']);
-            $("#sexou").val(r['sexo']);
-            $("#direccionu").val(r['direccion'])
-            $("#celularu").val(r['celular']);
-            $("#emailu").val(r['email']);
-            $("#idCliente").val(r['idCliente']);
+            $("#idClienteu").val(r['idCliente']);
+            $("#idOvalou").val(r['idOvalo']);
+            $("#idLoteu").val(r['idLote']);
+            $("#numLoteu").val(r['numLote']);
+            $("#horaInicio1u").val(r['horaInicio1'])
+            $("#horaFin1u").val(r['horaFin1']);
+            $("#diaRiego1u").val(r['diaRiego1']);
+            $("#horaInicio2u").val(r['horaInicio2']);
+            $("#horaFin2u").val(r['horaFin2']);
+            $("#diaRiego2u").val(r['diaRiego2']);
+            $("#idHoraRiego").val(r['idHoraRiego']);
         }
     });
 }
 
- function editarCliente(){
+ function editarHoraRiego(){
     $.ajax({
-        url:"../Controller/editarCliente.php",
+        url:"../Controller/editarHoraRiego.php",
         type:"POST",
-        data:$("#frmClienteu").serialize(),
+        data:$("#frmHRu").serialize(),
         success:function (r) {
             if(r==1){
-                setTimeout("location.href='../View/listadoClientes.php'", 1900);
+                setTimeout("location.href='../View/listadoRiego.php'", 1900);
                 toastr.options = {
                     "closeButton":true,
                     "debug": false,
@@ -137,7 +140,7 @@ function obtenerCliente(idCliente){
                     "showMethod": "fadeIn",
                     "hideMethod": "fadeOut"
                 }
-                toastr["success"]("Cliente actualizado exitosamente", "Actualizado con éxito")
+                toastr["success"]("Registro de riego actualizado exitosamente", "Actualizado con éxito")
 
 
             }else if (r==2){
@@ -179,7 +182,7 @@ function obtenerCliente(idCliente){
                     "showMethod": "fadeIn",
                     "hideMethod": "fadeOut"
                 }
-                toastr["error"]("Error al actualizar cliente", "Error de regostro")
+                toastr["error"]("Error al actualizar el regitro de riego", "Error de regostro")
             }
 
         }
@@ -188,23 +191,23 @@ function obtenerCliente(idCliente){
     return false;
 }
 
-function eliminarCliente(idCliente){
+function eliminarHoraRiego(idHoraRiego){
     swal.fire({
+        type:"warning",
         title: "¿Estás seguro de eliminar este registro?",
         text: "!Una vez eliminado no podra recuperarse¡",
-        type: "warning",
         buttons: true,
         dangerMode: true,
     }).then((willDelete) => {
             if (willDelete) {
                 $.ajax({
                     type:"POST",
-                    url:"../Controller/eliminarCliente.php",
-                    data: "idCliente="+idCliente,
+                    url:"../Controller/eliminarHoraRiego.php",
+                    data: "idHoraRiego="+idHoraRiego,
                     success:function(r){
                         console.log(r);
                         if(r==1){
-                            setTimeout("location.href='../View/listadoClientes.php'", 1900);
+                            setTimeout("location.href='../View/listadoRiego.php'", 1900);
                             toastr.options = {
                                 "closeButton":true,
                                 "debug": false,
@@ -222,7 +225,7 @@ function eliminarCliente(idCliente){
                                 "showMethod": "fadeIn",
                                 "hideMethod": "fadeOut"
                             }
-                            toastr["success"]("Cliente eliminado exitosamente", "Registro eliminado")
+                            toastr["success"]("Registro eliminado exitosamente", "Registro eliminado")
                         }else{
                             toastr.options = {
                                 "closeButton":true,
@@ -241,7 +244,7 @@ function eliminarCliente(idCliente){
                                 "showMethod": "fadeIn",
                                 "hideMethod": "fadeOut"
                             }
-                            toastr["error"]("Error al eliminar el cliente", "Error de eliminación")
+                            toastr["error"]("Error al eliminar el registro de riego", "Error de eliminación")
                         }
                     }
                 });
@@ -249,6 +252,29 @@ function eliminarCliente(idCliente){
         });
 }
 
+function capturaNumLote(idLote) {
+    $.ajax({
+        url: "../Controller/capturarNumLote.php",
+        type: "POST",
+        data: "idLote=" + idLote,
+        success: function (r) {
+            $('#numLote').val(r);
+        }
 
+
+    });
+}
+
+
+function capturaNumLoteRiego(idLoteu) {
+    $.ajax({
+        url: "../Controller/capturarNumLoteRiego.php",
+        type: "POST",
+        data: "idLoteu=" + idLoteu,
+        success: function (r) {
+            $('#numLoteu').val(r);
+        }
+    });
+}
 
 

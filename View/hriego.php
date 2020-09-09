@@ -31,7 +31,7 @@
                         <div class="row mt-2 mb-4">
                             <div class="col">
                                 <label for="nombre"><strong>Cliente</strong></label>
-                                <select name="cliente" id="cliente" class="form-control"  >
+                                <select name="idCliente" id="idCliente" class="form-control"  required="required">
                                     <option value="" selected="selected" disabled="disabled">--Seleccione una opción--</option>
                                     <?php
 
@@ -46,7 +46,7 @@
                             </div>
                             <div class="col">
                                 <label for="nombre"><strong>Número de Ovalo</strong></label>
-                                <select name="ovalo" id="ovalo" class="form-control">
+                                <select name="idOvalo" id="idOvalo" class="form-control" required="required">
                                     <option value="" selected="selected" disabled="disabled">--Seleccione una opción--</option>
                                     <?php
                                     require_once("../Model/Ovalo.php");
@@ -62,7 +62,7 @@
                         <div class="row mt-2 mb-4">
                             <div class="col">
                                 <label for="nombre"><strong>Clave de Lote</strong></label>
-                                <select name="claveLote" id="claveLote" class="form-control">
+                                <select name="idLote" id="idLote" class="form-control" onchange="capturaNumLote(this.value)" required="required">
                                     <option value="" selected="selected" disabled="disabled">--Seleccione una opción--</option>
 
                                     <?php
@@ -72,7 +72,7 @@
 
                                     foreach ($result3 as $key2):
                                     ?>
-                                    <option value="<?php echo $key2['clave']?>"><?php echo $key2['clave']?></option>
+                                    <option value="<?php echo $key2['idLote']?>"><?php echo $key2['clave']?></option>
                                     <?php endforeach;?>
                                 </select>
 
@@ -82,7 +82,7 @@
                                 <!--El valor se obtiene
                                  a partir de la formula
                                  (superficie/10000)-->
-                                <input type="text" class="form-control" name="numLote" id="numLote" maxlength="6" minlength="1" >
+                                <input type="text" class="form-control" name="numLote" id="numLote" maxlength="6" minlength="1"  readonly="readonly" required="required">
                             </div>
                         </div>
                     <!--Fin formulario registro usuarios -->
@@ -116,22 +116,22 @@
                                 <!--Primer turno aumentar guión
                                  en la función validaNumeros-->
 
-                                <input type="text" class="form-control clockpicker" name="horaFin1" id="horaFin1"  readonly="readonly" >
+                                <input type="text" class="form-control clockpicker" name="horaInicio1" id="horaInicio1"  readonly="readonly"  required="required">
 
                             </div>
                             <div class="col">
                                 <!--Primer turno aumentar guión
                                  en la función validaNumeros-->
                                 <label for="fechaFin"><strong>Hora Fin</strong></label>
-                                <input type="text" class="form-control clockpicker" name="horaInicio1" id="horaInicio1"  readonly="readonly" >
+                                <input type="text" class="form-control clockpicker" name="horaFin1" id="horaFin1"  readonly="readonly"  required="required">
                             </div>
                         </div>
                         <div class="row mt-2 mb-4 col-lg-12">
-                            <div class="col">
+                            <div class="col" id="colNum">
                                 <!--Parsear a fecha para registrar -->
                                 <!-- -->
                                 <label for="diaRiego"><strong>Días de riego</strong></label>
-                                <input type="text" class="form-control" name="diaRiego1" id="diaRiego1" maxlength="6" minlength="1" >
+                                <input type="text" class="form-control" name="diaRiego1" id="diaRiego1" maxlength="6" minlength="1"  required="required">
                             </div>
                         </div>
 
