@@ -11,37 +11,39 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="#" >
+                <form id="frmpU" onsubmit="return editarParametros()" method="post" >
                     <div class="row mt-1">
                         <div class="col">
                             <label for="tarifa">Tarifa</label>
-                            <input type="text" class="form-control"  name="tarifa" id="tarifa" minlength="1" maxlength="5" onkeypress="return validaNumericos(event) ;">
+                            <input type="hidden" name="idParametro" id="idParametro">
+                            <input type="text" class="form-control"  name="tarifau" id="tarifau" minlength="1" maxlength="5" onkeypress="return validaNumericos(event) ;">
                         </div>
                         <div class="col">
                             <label for="valorRiego">Valor de Riego</label>
-                            <input type="text" class="form-control"  name="valorRiego" id="valorRiego" minlength="1" maxlength="5" onkeypress="return validaNumericos(event) ;">
+                            <input type="text" class="form-control"  name="valorRiegou" id="valorRiegou" minlength="1" maxlength="5" onkeypress="return validaNumericos(event) ;">
                         </div>
                     </div>
                     <div class="row mt-2">
                         <div class="col">
                             <label for="multaSesion">Multa Sesión</label>
-                            <input type="text" class="form-control"  name="multaSesion" id="multaSesion" minlength="1" maxlength="5" onkeypress="return validaNumericos(event) ;">
+                            <input type="text" class="form-control"  name="multaSesionu" id="multaSesionu" minlength="1" maxlength="5" onkeypress="return validaNumericos(event) ;">
                         </div>
                         <div class="col">
                             <label for="multaSesion">Multa Minga</label>
-                            <input type="text" class="form-control"  name="multaMinga" id="multaMinga" minlength="1" maxlength="5" onkeypress="return validaNumericos(event) ;">
+                            <input type="text" class="form-control"  name="multaMingau" id="multaMingau" minlength="1" maxlength="5" onkeypress="return validaNumericos(event) ;">
                         </div>
 
                     </div>
                     <div class="row mt-2 ">
                         <div class="col-lg-6">
                             <label for="multaSesion">Valor Mora</label>
-                            <input type="text" class="form-control"  name="multaMinga" id="multaMinga" minlength="1" maxlength="5" onkeypress="return validaNumericos(event) ;">
+                            <input type="text" class="form-control"  name="valorMorau" id="valorMorau" minlength="1" maxlength="5" onkeypress="return validaNumericos(event) ;">
                         </div>
                     </div>
                     <div class="modal-footer mt-3 mb-0 ">
                         <button class="btn btn-danger" type="button" data-dismiss="modal">Cancelar</button>
-                        <a class="btn btn-success" href="#">Editar</a>
+                        <button class="btn btn-success" type="submit">Editar</button>
+
                     </div>
                 </form>
             </div>

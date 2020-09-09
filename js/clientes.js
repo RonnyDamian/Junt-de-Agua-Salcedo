@@ -87,7 +87,7 @@ function agregarCliente(){
                     "showMethod": "fadeIn",
                     "hideMethod": "fadeOut"
                 }
-                toastr["error"]("Hubo un error al registrar al cliente", "Error de regostro")
+                toastr["error"]("Hubo un error al registrar al cliente", "Error de registro")
             }
         }
     });

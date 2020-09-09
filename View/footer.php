@@ -73,6 +73,7 @@
 <script src="../js/clientes.js"></script>
 <script src="../js/lotes.js"></script>
 <script src="../js/horaRiego.js"></script>
+<script src="../js/parametros.js"></script>
 <script src="../js/select2.js"></script>
 <!-- Core plugin JavaScript-->
 
