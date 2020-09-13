@@ -211,22 +211,47 @@ function eliminarLote(idLote){
             });
         }
     });
+}
 
-    function llenaTabla(){
-        $.ajax({
-            url:"../Controller/obtenerLote.php",
-            type:"post",
-            data:$("#frmT").serialize(),
-            success:function(response){
+function obtenerCobros(){
+    $.ajax({
+        url:"../Controller/obtenerCobro.php",
+        type:"post",
+        data:$("#frmT").serialize(),
+        success:function(response) {
+            alert(response);
+            if (response!=null) {
                 response = JSON.parse(response);
-                $("#tarifaT").val(response['tarifa']);
-                $("#riegoT").val(response['valorRiego']);
-                $("#sesionT").val(response['multaSesion']);
-                $("#mingaT").val(response['multaMinga']);
-                $("#valorMoraT").val(response['valorMora']);
-            }
-        });
-        return false;
-    }
+                $("#clienteT").val(response['nombre'] + " " + response['apellido']);
+                $("#tarifaT").val("$"+response['TARIFA']);
+                $("#riegoT").val("$"+response['valor_riego']);
+                $("#sesionT").val("$"+response['valor_sesion']);
+                $("#mingaT").val("$"+response['valor_minga']);
+                $("#valorMoraT").val(0);
+                $("#totalT").val("$"+response['valor_total']);
 
+
+            } else {
+                toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "newestOnTop": true,
+                    "progressBar": true,
+                    "positionClass": "toast-top-center",
+                    "preventDuplicates": true,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
+                toastr["error"]("Error el registro no existe", "Regitro no encontrado")
+            }
+        }
+    });
+    return false;
 }

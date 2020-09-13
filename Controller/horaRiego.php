@@ -1,7 +1,15 @@
 <?php
  require_once ("../Model/HorarioRiego.php");
 
+
  $obj = new HorarioRiego();
+
+$horaInicio = floatval($_POST['horaInicio1']);
+$horaFin=floatval($_POST['horaFin1']);
+$horaInicio2 = floatval($_POST['horaInicio2']);
+$horaFin2=floatval($_POST['horaFin2']);
+$hora1 = $horaFin-$horaInicio;
+$hora2 =$horaFin2-$horaInicio2;
  $data= array(
      "idCliente"=>$_POST['idCliente'],
      "idOvalo"=>$_POST['idOvalo'],
@@ -11,15 +19,10 @@
      "diaRiego1"=>$_POST['diaRiego1'],
      "horaInicio2"=>$_POST['horaInicio2'],
      "horaFin2"=>$_POST['horaFin2'],
-     "diaRiego2"=>$_POST['diaRiego2']
+     "diaRiego2"=>$_POST['diaRiego2'],
+     "horaRiego"=>$hora1
  );
 
-$horaInicio = floatval($data['horaInicio1']);
-$horaFin=floatval($data['horaFin1']);
-$horaInicio2 = floatval($data['horaInicio2']);
-$horaFin2=floatval($data['horaFin2']);
-$hora1 = $horaFin-$horaInicio;
-$hora2 =$horaFin2-$horaInicio2;
 
 if(($horaInicio>=$horaFin) || ($horaInicio2>=$horaFin2)){
 echo 2;

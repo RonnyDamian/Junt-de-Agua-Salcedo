@@ -96,6 +96,10 @@ if(empty($_SESSION['s_usuario'])){
                         <i class="fas fa-fw fa-toolbox"></i>
                         Parametros
                     </a>
+                    <a class="collapse-item" href="gastos.php">
+                        <i class="fas fa-fw fa-coins"></i>
+                        Gastos
+                    </a>
                 </div>
             </div>
         </li>
@@ -127,6 +131,10 @@ if(empty($_SESSION['s_usuario'])){
                         <i class="fas fa-fw fa-list-ul"></i>
                         Listado Hora de Riego
                     </a>
+                    <a class="collapse-item" href="listadoGastos.php">
+                        <i class="fas fa-fw fa-list-ul"></i>
+                        Listado de Gastos
+                    </a>
                 </div>
             </div>
         </li>
@@ -136,17 +144,17 @@ if(empty($_SESSION['s_usuario'])){
         <li class="nav-item">
             <a class="nav-link collapsed" data-toggle="collapse" href="#multiCollapseExample2" role="button" aria-expanded="false" aria-controls="multiCollapseExample2">
                 <i class="fas fa-fw fa-shopping-bag"></i>
-                <span>Cartera</span>
+                <span>Cobros</span>
             </a>
             <div id="multiCollapseExample2" class="collapse" aria-labelledby="headingUtilities" data-parent="">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="utilities-color.html">
+                    <a class="collapse-item" href="pagoCuotas.php">
                         <i class="fas fa-fw fa-coins"></i>
-                        Gastos
+                        Pago Por cuotas
                     </a>
-                    <a class="collapse-item" href="utilities-border.html">
-                        <i class="fas fa-fw fa-money-bill"></i>
-                        Cobros
+                    <a class="collapse-item" href="pagoCuotas.php">
+                        <i class="fas fa-fw fa-coins"></i>
+                        Pago al contado
                     </a>
                 </div>
             </div>
@@ -160,11 +168,11 @@ if(empty($_SESSION['s_usuario'])){
             </a>
             <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="utilities-color.html">
+                    <a class="collapse-item" href="listadoMingas.php">
                         <i class="fas fa-fw fa-check-circle"></i>
                         Mingas
                     </a>
-                    <a class="collapse-item" href="utilities-border.html">
+                    <a class="collapse-item" href="listadoSesiones.php">
                         <i class="fas fa-fw fa-check-circle"></i>
                         Sesiones
                     </a>
@@ -209,7 +217,7 @@ if(empty($_SESSION['s_usuario'])){
 
         <!-- Nav Item - Charts -->
         <li class="nav-item">
-            <a class="nav-link" href="charts.html">
+            <a class="nav-link" href="listadoNotificaciones.php">
                 <i class="fas fa-bell fa-fw"></i>
                 <span>Notificaciones</span></a>
         </li>

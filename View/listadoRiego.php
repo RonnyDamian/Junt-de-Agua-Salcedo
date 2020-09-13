@@ -34,6 +34,7 @@
                         <th>Hora Inicio 2</th>
                         <th>Hora Fin 2</th>
                         <th>Dia de Riegos 2</th>
+                        <th>Horas de Riego</th>
                         <th>Editar</th>
                         <th>Eliminar</th>
                     </tr>
@@ -56,6 +57,7 @@
                                     <td>'.$value['horaInicio2'].'</td>
                                     <td>'.$value['horaFin2'].'</td>
                                     <td>'.$value['diaRiego2'].'</td>
+                                    <td>'.$value['horaRiego'].'</td>
                                   <td>
                                 <button class="btn btn-warning btn-sm" onclick="obtenerHoraRiego('.$value['idHoraRiego'].')" data-toggle="modal" data-target="#editarHoraRiego">
                                  <i class="fa fa-edit">

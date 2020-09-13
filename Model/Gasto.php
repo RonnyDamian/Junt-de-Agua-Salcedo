@@ -3,7 +3,7 @@
 error_reporting(0);
 
 
- class Cliente extends Conexion{
+ class Gasto extends Conexion{
 
      public static function valida_Email_Cedula($data){
          $sql ="SELECT * FROM t_clientes WHERE email=? OR cedula=? ";
@@ -16,26 +16,38 @@ error_reporting(0);
      }
 
 
-     public static function agregarCliente($data){
-         $sql="INSERT INTO t_clientes (nombre,apellido,cedula,sexo,direccion,celular,email)
-                      VALUES (?,?,?,?,?,?,?)";
+     public static function agregarGastos($data){
+         $total=0;
+         $cantidad=0;
+         $vUnitario=0;
+         $sql="INSERT INTO t_gastos (responsable,cantidad,vUnitario,total,descripcion,fecha)
+                      VALUES (?,?,?,?,?,?)";
          $sql=Conexion::conectar()->prepare($sql);
-         $sql->bindValue(1, $data['nombre'], PDO::PARAM_STR);
-         $sql->bindValue(2, $data['apellido'], PDO::PARAM_STR);
-         $sql->bindValue(3, $data['cedula'], PDO::PARAM_STR);
-         $sql->bindValue(4, $data['sexo'], PDO::PARAM_STR);
-         $sql->bindValue(5, $data['direccion'], PDO::PARAM_STR);
-         $sql->bindValue(6, $data['celular'], PDO::PARAM_STR);
-         $sql->bindValue(7, $data['email'], PDO::PARAM_STR);
+
+         /*Calculo total de gasto*/
+         $cantidad=$data['cantidad'];
+         $vUnitario=$data['vUnitario'];
+
+         $cantidad=floatval($cantidad);
+         $vUnitario=floatval($vUnitario);
+         $total=$cantidad*$vUnitario;
+         $total=strval($total);
+
+
+         $sql->bindValue(1, $data['responsable'], PDO::PARAM_STR);
+         $sql->bindValue(2, $data['cantidad'], PDO::PARAM_STR);
+         $sql->bindValue(3, $data['vUnitario'], PDO::PARAM_STR);
+         $sql->bindValue(4, $total, PDO::PARAM_STR);
+         $sql->bindValue(5, $data['descripcion'], PDO::PARAM_STR);
+         $sql->bindValue(6, $data['fecha'], PDO::PARAM_STR);
          $query=$sql->execute();
          return $query;
      }
-     public function mostrarClientes(){
-         $sql="SELECT * FROM t_clientes";
+     public function mostrarGastos(){
+         $sql="SELECT * FROM t_gastos";
          $sql=Conexion::conectar()->prepare($sql);
          $sql->execute();
          $query=$sql->fetchAll();
-
          return $query;
      }
 
@@ -46,44 +58,55 @@ error_reporting(0);
          $query=$sql->fetchAll();
          return $query;
      }
-     public static function obtenerCliente($idCliente){
-         $sql="SELECT * FROM t_clientes WHERE idCliente=?";
+     public static function obtenerGastos($idGastos){
+         $sql="SELECT * FROM t_gastos WHERE idGastos=?";
          $sql=Conexion::conectar()->prepare($sql);
-         $sql->bindValue(1,$idCliente, PDO::PARAM_INT);
+         $sql->bindValue(1,$idGastos, PDO::PARAM_INT);
          $sql->execute();
          $query=$sql->fetch();
          return $query;
      }
 
+     public function editarGastos($data){
+         $total=0;
+         $cantidad=0;
+         $vUnitario=0;
 
-
-     public function editarCliente($data){
-         $sql="UPDATE t_clientes
-              SET nombre=?,
-                  apellido=?,
-                  cedula=?,
-                  sexo=?,                  
-                  direccion=?,
-                  celular=?,
-                  email=?
+         $sql="UPDATE t_gastos
+              SET responsable=?,
+                  cantidad=?,
+                  vUnitario=?,
+                  total=?,
+                  descripcion=?,                  
+                  fecha=?
              WHERE 
-                  idCliente=?";
+                  idGastos=?";
+
+         $cantidad=$data['cantidad'];
+         $vUnitario=$data['vUnitario'];
+
+         $cantidad=floatval($cantidad);
+         $vUnitario=floatval($vUnitario);
+         $total=$cantidad*$vUnitario;
+         $total=strval($total);
+
+
          $sql=Conexion::conectar()->prepare($sql);
-         $sql->bindValue(1, $data['nombre'], PDO::PARAM_STR);
-         $sql->bindValue(2, $data['apellido'], PDO::PARAM_STR);
-         $sql->bindValue(3, $data['cedula'], PDO::PARAM_STR);
-         $sql->bindValue(4, $data['sexo'], PDO::PARAM_STR);
-         $sql->bindValue(6, $data['direccion'], PDO::PARAM_STR);
-         $sql->bindValue(5, $data['celular'], PDO::PARAM_STR);
-         $sql->bindValue(7, $data['email'], PDO::PARAM_STR);
-         $sql->bindValue(8, $data['idCliente'], PDO::PARAM_INT);
+         $sql->bindValue(1, $data['responsable'], PDO::PARAM_STR);
+         $sql->bindValue(2, $data['cantidad'], PDO::PARAM_STR);
+         $sql->bindValue(3, $data['vUnitario'], PDO::PARAM_STR);
+         $sql->bindValue(4, $total, PDO::PARAM_STR);
+         $sql->bindValue(5, $data['descripcion'], PDO::PARAM_STR);
+         $sql->bindValue(6, $data['fecha'], PDO::PARAM_STR);
+         $sql->bindValue(7, $data['idGastos'], PDO::PARAM_INT);
          $query=$sql->execute();
+
          return $query;
      }
-     public static function eliminarCliente($idCliente){
-         $sql="DELETE FROM t_clientes WHERE idCliente=?";
+     public static function eliminarGastos($idGastos){
+         $sql="DELETE FROM t_gastos WHERE idGastos=?";
          $query=Conexion::conectar()->prepare($sql);
-         $query->bindValue(1,$idCliente, PDO::PARAM_INT);
+         $query->bindValue(1,$idGastos, PDO::PARAM_INT);
          return $query->execute();
      }
      public static function validaCedula($strCedula)
@@ -158,19 +181,6 @@ error_reporting(0);
 
 
 
-
-     /* *****WEBSERVICES**********
-      * Método para comunicar la app movil con la web
-     */
-
-     public static function obtenerClienteMovil(){
-         $sql="SELECT * FROM t_clientes";
-         $sql=Conexion::conectar()->prepare($sql);
-         $sql->execute();
-         $query=$sql->fetch();
-         print_r($query);
-         return $query;
-     }
 
  }
 

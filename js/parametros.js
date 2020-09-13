@@ -70,3 +70,4 @@ function obtenerParametros(idParametro){
     return false;
 }
 
+

@@ -110,3 +110,63 @@ valorRiego VARCHAR(10) NOT NULL,
 multaSesion VARCHAR(10) NOT NULL,
 valorMora VARCHAR(10) DEFAULT NULL 
 )ENGINE=INNODB DEFAULT CHARSET ='utf8';
+
+/*Creación de la tabla Gastos*/
+ DROP TABLE IF EXISTS t_gastos;
+ CREATE TABLE IF NOT EXISTS t_gastos
+ (
+ idGastos INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ fecha VARCHAR(30) NOT NULL,
+ responsable VARCHAR(70) NOT NULL,
+ cantidad VARCHAR(7) NOT NULL,
+ vUnitario VARCHAR(7) NOT NULL,
+ total VARCHAR(7) NOT NULL,
+ descripcion VARCHAR(255) NOT NULL
+ )ENGINE=INNODB DEFAULT CHARSET ='utf8';
+
+ /*Creación tabla sesiones*/
+ DROP TABLE IF EXISTS t_sesiones;
+ CREATE TABLE IF NOT EXISTS  t_sesiones
+ (
+ idSesion INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ estado VARCHAR(5) NOT NULL,
+ fecha DATETIME NOT NULL,
+ idCliente INT(11) NOT NULL
+ )ENGINE=INNODB DEFAULT  CHARSET='utf8';
+/*Creación tabla mingas*/
+DROP TABLE IF EXISTS t_mingas;
+ CREATE TABLE IF NOT EXISTS  t_mingas
+ (
+ idMinga INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ estado VARCHAR(5) NOT NULL,
+ fecha DATETIME NOT NULL,
+ idCliente INT(11) NOT NULL
+ )ENGINE=INNODB DEFAULT  CHARSET='utf8';
+
+/*Creación tabla Notificaciones*/
+
+DROP TABLE IF EXISTS t_notificaciones;
+ CREATE TABLE IF NOT EXISTS  t_notificaciones
+ (
+ idNotificacion INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ tipo VARCHAR(10) NOT NULL,
+ descripcion VARCHAR(255) NOT NULL,
+ fecha varchar(25) NOT NULL
+ )ENGINE=INNODB DEFAULT  CHARSET='utf8';
+
+/*Creación de la tabla t_cobros*/
+DROP TABLE IF EXISTS t_cobros;
+ CREATE TABLE IF NOT EXISTS  t_cobros
+ (
+ idCobro INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ cliente VARCHAR(75) NOT NULL,
+ tarifa VARCHAR(6) NOT NULL,
+ valorRiego varchar(6) NOT NULL,
+ multaSesion varchar(6) NOT NULL,
+ multaMinga varchar(6) NOT NULL,
+ valorMora varchar(6) NOT NULL
+ total varchar(6) NOT NULL,
+ estado varchar(20) NOT NULL,
+ idCliente INT(11) NOT NULL
+ )ENGINE=INNODB DEFAULT  CHARSET='utf8';
+

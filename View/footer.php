@@ -74,6 +74,11 @@
 <script src="../js/lotes.js"></script>
 <script src="../js/horaRiego.js"></script>
 <script src="../js/parametros.js"></script>
+<script src="../js/gastos.js"></script>
+<script src="../js/cobros.js"></script>
+<script src="../js/sesiones.js"></script>
+<script src="../js/mingas.js"></script>
+<script src="../js/notificaciones.js"></script>
 <script src="../js/select2.js"></script>
 <!-- Core plugin JavaScript-->
 
@@ -87,5 +92,6 @@
 </body>
 
 </html>
+
 
 

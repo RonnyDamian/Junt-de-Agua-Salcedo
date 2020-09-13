@@ -19,8 +19,8 @@
          return $query;
      }
      public static function agregarHoraRiego($data){
-         $sql="INSERT INTO t_horariego (idCliente,idOvalo,idLote,horaInicio1,horaFin1,diaRiego1,horaInicio2,horaFin2,diaRiego2)
-                      VALUES (?,?,?,?,?,?,?,?,?)";
+         $sql="INSERT INTO t_horariego (idCliente,idOvalo,idLote,horaInicio1,horaFin1,diaRiego1,horaInicio2,horaFin2,diaRiego2,horaRiego)
+                      VALUES (?,?,?,?,?,?,?,?,?,?)";
          $sql=Conexion::conectar()->prepare($sql);
          $sql->bindValue(1, $data['idCliente'], PDO::PARAM_STR);
          $sql->bindValue(2, $data['idOvalo'], PDO::PARAM_STR);
@@ -31,6 +31,7 @@
          $sql->bindValue(7, $data['horaInicio2'], PDO::PARAM_STR);
          $sql->bindValue(8, $data['horaFin2'], PDO::PARAM_STR);
          $sql->bindValue(9, $data['diaRiego2'], PDO::PARAM_STR);
+         $sql->bindValue(10, $data['horaRiego'], PDO::PARAM_STR);
          $query=$sql->execute();
          return $query;
      }
@@ -46,6 +47,7 @@
                         h.horaInicio2,
                         h.horaFin2,
                         h.diaRiego2,
+                        h.horaRiego,
                         c.idCliente,
                         c.nombre,
                         c.apellido,                                             
@@ -80,7 +82,8 @@
                   diaRiego1=?,
                   horaInicio2=?,
                   horaFin2=?,                  
-                  diaRiego2=?                  
+                  diaRiego2=?,
+                  horaRiego=?                  
              WHERE 
                   idHoraRiego=?";
          $sql=Conexion::conectar()->prepare($sql);
@@ -93,7 +96,9 @@
          $sql->bindValue(7, $data['horaInicio2'], PDO::PARAM_STR);
          $sql->bindValue(8, $data['horaFin2'], PDO::PARAM_STR);
          $sql->bindValue(9, $data['diaRiego2'], PDO::PARAM_STR);
-         $sql->bindValue(10, $data['idHoraRiego'], PDO::PARAM_INT);
+         $sql->bindValue(10, $data['horaRiego'], PDO::PARAM_STR);
+         $sql->bindValue(11, $data['idHoraRiego'], PDO::PARAM_INT);
+
          $query=$sql->execute();
          return $query;
      }

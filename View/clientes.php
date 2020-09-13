@@ -19,7 +19,6 @@
                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
                         </a>
-
                     </div>
                 </div>
                 <!-- Card Body -->
@@ -67,10 +66,10 @@
                         <hr>
                         <div class="row">
                             <div class="col ">
-                                <a href="home.php" class="btn btn-danger float-right">
+                                <button class="btn btn-danger" onclick="obtenerClienteMovil()">
                                     <i class="fa fa-undo-alt"></i>
                                     Volver
-                                </a>
+                                </button>
                             </div>
                             <div class="col">
                                 <button type="submit" class="btn btn-success float-left" id="enviar">
@@ -90,4 +89,4 @@
     <!--Fin página Clientes -->
 
 
-<?php require_once ("footer.php")?>
+    <?php require_once ("footer.php")?>

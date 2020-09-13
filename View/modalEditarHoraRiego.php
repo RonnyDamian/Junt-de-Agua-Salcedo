@@ -168,7 +168,8 @@
                                             <label for="fechaInicio"><strong>Hora Inicio</strong></label>
                                             <!--Primer turno aumentar guión
                                              en la función validaNumeros-->
-                                            <input type="text" class="form-control clockpicker" name="horaInicio2u" id="horaInicio2u"  readonly="readonly" >                            </div>
+                                            <input type="text" class="form-control clockpicker" name="horaInicio2u" id="horaInicio2u"  readonly="readonly" >
+                                        </div>
                                         <div class="col">
                                             <!--Primer turno aumentar guión
                                              en la función validaNumeros-->

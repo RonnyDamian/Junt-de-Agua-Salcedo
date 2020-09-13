@@ -29,6 +29,15 @@ error_reporting(0);
          return $query;
      }
 
+     public static function llenaTabla($searchParam){
+         $sql="SELECT * FROM t_parametros WHERE tarifa=?";
+         $sql=Conexion::conectar()->prepare($sql);
+         $sql->bindValue(1,$searchParam, PDO::PARAM_INT);
+         $sql->execute();
+         $query=$sql->fetch();
+         return $query;
+     }
+
      public function editarParametros($data){
 
          $sql="UPDATE t_parametros

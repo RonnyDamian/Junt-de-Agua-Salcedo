@@ -1,7 +1,7 @@
 /*Fin de Notificación mensaje toastr*/
 function validaNumericos(event) {
     /*Valida solo números*/
-    if(event.charCode >= 48 && event.charCode <= 57){
+    if(event.charCode >= 46 && event.charCode <= 57){
         return true;
     }else{
         return false;

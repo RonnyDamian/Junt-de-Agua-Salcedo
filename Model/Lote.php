@@ -127,6 +127,113 @@
          echo $data;
          die();
     }
+    public static function obtenerCobro($searchParam){
+
+         /*CALCULO VALOR A PAGAR POR LA HORA DE RIEGO*/
+
+         $sql2 = "				SELECT
+								c.cedula,
+								c.idCliente,
+								h.idCliente,
+								h.horaRiego, SUM(h.horaRiego)*0.5	as valor_riego
+			FROM t_clientes as c inner join t_horariego as h
+			ON c.idCliente=h.idCliente
+			WHERE c.cedula=?";
+
+        $sql2=Conexion::conectar()->prepare($sql2);
+        $sql2->bindValue(1, $searchParam,PDO::PARAM_INT);
+        $sql2->execute();
+        $query=$sql2->fetch();
+        $valorRiego=$query['valor_riego'];
+
+        /*CALCULA VALOR A PAGAR POR SESIÓN*/
+
+        $sql4="SELECT c.idCliente,
+			    c.cedula,	
+			    CONCAT(nombre,' ',apellido) AS NOMBRE_COMPLETO,
+			    COUNT(s.estado)*5 AS VALOR_SESION,
+			    s.idCliente,
+			    s.fecha,
+			    s.idSesion
+                FROM t_clientes AS c INNER JOIN t_sesiones AS s
+                ON c.idCliente=s.idCliente 
+                WHERE c.cedula=? AND s.estado='NO';";
+                $sql4=Conexion::conectar()->prepare($sql4);
+                $sql4->bindValue(1, $searchParam,PDO::PARAM_INT);
+                $sql4->execute();
+                $query=$sql4->fetch();
+                $valorSesion=$query['VALOR_SESION'];
+
+        /*CALCULO VALOR A PAGAR POR LA MINGA*/
+
+        $sql3="SELECT c.idCliente,
+                      c.cedula, 
+                      CONCAT(nombre,'',apellido) AS NOMBRE_COMPLETO,
+                      COUNT(m.estado)*10 AS VALOR_MINGA,
+                      m.idCliente,
+                      m.fecha,
+                      m.idMinga
+                     FROM t_clientes AS c INNER JOIN t_mingas AS m
+                     ON c.idCliente=m.idCliente
+                     WHERE c.cedula=? AND m.estado='NO';";
+                    $sql3=Conexion::conectar()->prepare($sql3);
+                    $sql3->bindValue(1, $searchParam,PDO::PARAM_INT);
+                    $sql3->execute();
+                    $query=$sql3->fetch();
+                    $valorMinga=$query['VALOR_MINGA'];
+
+
+        $sql="SELECT  c.cedula,
+				c.nombre,
+				c.apellido,
+				c.idCliente,
+				l.idCliente,
+				l.precio,
+				SUM(precio)*8 AS TARIFA
+				FROM t_clientes AS c INNER JOIN t_lotes AS l
+  			ON c.idCliente=l.idCliente
+				WHERE c.cedula=?;";
+         $sql=Conexion::conectar()->prepare($sql);
+         $sql->bindValue(1, $searchParam,PDO::PARAM_INT);
+         $sql->execute();
+         $query=$sql->fetch();
+         $query['valor_riego']=$valorRiego;
+         $query[7]=$valorRiego;
+        $query['valor_sesion']=$valorSesion;
+        $query[8]=$valorSesion;
+        $query['valor_minga']=$valorMinga;
+        $query[9]=$valorMinga;
+        $fecha=date('Y');
+        if($fecha>2020){
+           $valorMora=10;
+        }elseif($fecha==2020){
+            $valorMora=0;
+        }else{
+            $valorMora= -1;
+        }
+        $query['valor_mora']=$valorMora;
+        $query[10]=$valorMora;
+        $total=$query['TARIFA']+$query['valor_riego']+$query['valor_sesion']+$query['valor_minga']+$query['valor_mora'];
+        $query['valor_total']=$total;
+        $query[11]=$total;
+
+        $sqlCobro="INSERT INTO t_cobros VALUES (null,?,?,?,?,?,?,?,?,?,now())";
+        $sqlCobro =Conexion::conectar()->prepare($sqlCobro);
+        $sql->bindValue(1,$query['nombre'] ." ".$query['apellido'],PDO::PARAM_STR);
+        $sql->bindValue(2, $query['TARIFA'],PDO::PARAM_STR);
+        $sql->bindValue(3,$query['valor_riego'], PDO::PARAM_STR);
+        $sql->bindValue(4, $query['valor_sesion'], PDO::PARAM_STR);
+        $sql->bindValue(5, $query['valor_minga'], PDO::PARAM_STR);
+        $sql->bindValue( 6,$query['valor_mora'], PDO::PARAM_STR);
+        $sql->bindValue( 7,"PENDIENTE", PDO::PARAM_STR);
+        $sql->bindValue( 8,$query['valor_total'], PDO::PARAM_STR);
+        $sql->bindValue( 9,$query['idCloente'], PDO::PARAM_STR);
+        $queryCobros=$sqlCobro->execute();
+        print_r($queryCobros);
+        die();
+
+        return $query;
+    }
 
 
  }
