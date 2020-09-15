@@ -219,7 +219,7 @@ function obtenerCobros(){
         type:"post",
         data:$("#frmT").serialize(),
         success:function(response) {
-            alert(response);
+
             if (response!=null) {
                 response = JSON.parse(response);
                 $("#clienteT").val(response['nombre'] + " " + response['apellido']);
@@ -227,8 +227,9 @@ function obtenerCobros(){
                 $("#riegoT").val("$"+response['valor_riego']);
                 $("#sesionT").val("$"+response['valor_sesion']);
                 $("#mingaT").val("$"+response['valor_minga']);
-                $("#valorMoraT").val(0);
+                $("#valorMoraT").val("$" + 0);
                 $("#totalT").val("$"+response['valor_total']);
+                $("#id_cliente").val(response['idCliente']);
 
 
             } else {
@@ -254,4 +255,33 @@ function obtenerCobros(){
         }
     });
     return false;
+}
+
+function limpiar(){
+
+    $("#clienteT").val("");
+    $("#tarifaT").val("");
+    $("#riegoT").val("");
+    $("#sesionT").val("");
+    $("#mingaT").val("");
+    $("#valorMoraT").val("");
+    $("#totalT").val("");
+}
+
+
+function obtenerCobroModal(){
+    var valor = document.getElementById("id_cliente").value;
+    $.ajax({
+        url:"../Controller/cobroModal.php",
+        type:"POST",
+        data:"id_cliente="+valor,
+        success:function(response) {
+            alert(response);
+            response=JSON.parse(response);
+            $("#idCliente").val(response['idCliente']);
+            $("#cliente").val(response['cliente']);
+            $("#totalPago").val(response['total']);
+            $("#lotePago").val(response['lote']);
+        }
+    });
 }

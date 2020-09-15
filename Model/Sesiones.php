@@ -6,6 +6,22 @@ error_reporting(0);
  class Sesiones extends Conexion{
 
 
+     public static function agregarSesionMovil($data){
+         $sql="INSERT INTO t_sesiones 
+                      VALUES (null,?,?,?)";
+         $sql=Conexion::conectar()->prepare($sql);
+         $sql->bindValue(1, $data['estado'], PDO::PARAM_STR);
+         $sql->bindValue(2, $data['fecha'], PDO::PARAM_STR);
+         $sql->bindValue(3, $data['idCliente'], PDO::PARAM_INT);
+         $query=$sql->execute();
+         return $query;
+     }
+
+
+              
+
+
+
      public function mostrarSesiones(){
          $sql="SELECT 
                         s.idCliente,

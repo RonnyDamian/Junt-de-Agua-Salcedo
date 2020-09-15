@@ -142,22 +142,9 @@ if(empty($_SESSION['s_usuario'])){
         <hr class="sidebar-divider">
         <!--Inicio Navegación Cartera -->
         <li class="nav-item">
-            <a class="nav-link collapsed" data-toggle="collapse" href="#multiCollapseExample2" role="button" aria-expanded="false" aria-controls="multiCollapseExample2">
-                <i class="fas fa-fw fa-shopping-bag"></i>
-                <span>Cobros</span>
-            </a>
-            <div id="multiCollapseExample2" class="collapse" aria-labelledby="headingUtilities" data-parent="">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="pagoCuotas.php">
-                        <i class="fas fa-fw fa-coins"></i>
-                        Pago Por cuotas
-                    </a>
-                    <a class="collapse-item" href="pagoCuotas.php">
-                        <i class="fas fa-fw fa-coins"></i>
-                        Pago al contado
-                    </a>
-                </div>
-            </div>
+            <a class="nav-link" href="pagoCuotas.php">
+                <i class="fas fa-coins"></i>
+                <span>Pagos</span></a>
         </li>
         <hr class="sidebar-divider">
         <!--Inicio Navegación Asistencias-->

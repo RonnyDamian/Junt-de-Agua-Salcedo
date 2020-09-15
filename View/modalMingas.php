@@ -33,18 +33,18 @@ $color=array(
                     </div>
                     <div class="row mt-2 mb-4">
                         <div class="col">
+                            <label for="fecha"><strong>Fecha de Registro</strong></label>
+                            <input type="text" class="form-control" name="fechau" id="fechau" minlength="10" maxlength="10" required="required" readonly>
+                        </div>
+                    </div>
+                    <div class="row mt-2 mb-4">
+                        <div class="col">
                             <label for="apellido"><strong>Asistencia</strong></label>
                             <select name="estadou" id="estadou" required class="form-control ">
                                 <option value="SI">SI</option>
                                 <option value="NO">NO</option>
                             </select>
 
-                        </div>
-                    </div>
-                    <div class="row mt-2 mb-4">
-                        <div class="col">
-                            <label for="fecha"><strong>Fecha de Registro</strong></label>
-                            <input type="text" class="form-control" name="fechau" id="fechau" minlength="10" maxlength="10" required="required" onkeypress="return validaNumericos(event) ;">
                         </div>
                     </div>
                     <hr>

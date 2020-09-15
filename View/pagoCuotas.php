@@ -1,4 +1,4 @@
-<title>Pagos por Lotes</title>
+
 <?php  require_once("header.php")?>
 
 <!--Inicio página Clientes -->
@@ -14,7 +14,7 @@
             <div class="card shadow mb-4 ">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between ">
-                    <h3 class="m-0 font-weight-bold text-primary ">Registro de Pagos por Cuotas</h3>
+                    <h3 class="m-0 font-weight-bold text-primary ">Pagos</h3>
                     <div class="dropdown no-arrow">
                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
@@ -34,7 +34,7 @@
                             </div>
                             <div class="col-lg4">
                                 <br>
-                                <button class="btn btn-success py-sm-2 mt-2 float left form-control " > <i class="fa fa-search"> Buscar</i></button>
+                                <button type=submit class="btn btn-success py-sm-2 mt-2 float left form-control " > <i class="fa fa-search"> Buscar</i></button>
                             </div>
                 </form>
 
@@ -78,16 +78,17 @@
 
             </div>
             <div class="row">
-                <div class="col ">
-                    <a href="home.php" class="btn btn-danger float-right">
-                        <i class="fa fa-undo-alt"></i>
-                        Volver
-                    </a>
+                <div class="col">
+                    <button class="btn btn-danger float-right" onclick="return limpiar()">
+                        <i class="fa fa-brush"></i>
+                        Limpiar
+                    </button>
                 </div>
                 <div class="col">
-                    <button type="submit" class="btn btn-success float-left" id="enviar">
-                        <i class="far fa-save"></i>
-                        Guardar
+                    <input type="hidden" name="id_cliente" id="id_cliente" class="form-control">
+                    <button  class="btn btn-success float-left" id="enviar" data-toggle="modal" data-target="#frmPago" onclick="obtenerCobroModal()">
+                        <i class="fa fa-coins"></i>
+                        Pagar
                     </button>
                 </div>
             </div>
@@ -99,7 +100,8 @@
 </div>
 </div>
 
+
 <!--Fin página Clientes -->
 
-
+<?php require_once("modalCobro.php") ?>
 <?php require_once ("footer.php")?>

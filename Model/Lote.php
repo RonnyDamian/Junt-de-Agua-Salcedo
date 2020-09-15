@@ -217,20 +217,35 @@
         $query['valor_total']=$total;
         $query[11]=$total;
 
-        $sqlCobro="INSERT INTO t_cobros VALUES (null,?,?,?,?,?,?,?,?,?,now())";
-        $sqlCobro =Conexion::conectar()->prepare($sqlCobro);
-        $sql->bindValue(1,$query['nombre'] ." ".$query['apellido'],PDO::PARAM_STR);
-        $sql->bindValue(2, $query['TARIFA'],PDO::PARAM_STR);
-        $sql->bindValue(3,$query['valor_riego'], PDO::PARAM_STR);
-        $sql->bindValue(4, $query['valor_sesion'], PDO::PARAM_STR);
-        $sql->bindValue(5, $query['valor_minga'], PDO::PARAM_STR);
-        $sql->bindValue( 6,$query['valor_mora'], PDO::PARAM_STR);
-        $sql->bindValue( 7,"PENDIENTE", PDO::PARAM_STR);
-        $sql->bindValue( 8,$query['valor_total'], PDO::PARAM_STR);
-        $sql->bindValue( 9,$query['idCloente'], PDO::PARAM_STR);
-        $queryCobros=$sqlCobro->execute();
-        print_r($queryCobros);
-        die();
+        $cliente=$query['nombre'] ." ".$query['apellido'];
+        $tarifaCobro=$query['TARIFA'];
+        $valor_riego=$query['valor_riego'];
+        $multaSesion=$query['valor_sesion'];
+        $multaMinga=$query['valor_minga'];
+        $valor_mora=$query['valor_mora'];
+        $valor_total=$query['valor_total'];
+        $id_cliente=$query['idCliente'];
+
+        $sqlCC="SELECT * FROM t_cobros WHERE idCliente =?";
+        $sqlCC=Conexion::conectar()->prepare($sqlCC);
+        $sqlCC->bindValue(1,$id_cliente,PDO::PARAM_INT);
+        $sqlCC->execute();
+        $queryCC= $sqlCC->fetch();
+        if(!(is_array($queryCC)==true and count($queryCC)>1)){
+            $sqlCobro="INSERT INTO t_cobros VALUES (null,?,?,?,?,?,?,?,?,?,now())";
+            $sqlCobro =Conexion::conectar()->prepare($sqlCobro);
+            $sqlCobro->bindValue(1,$cliente,PDO::PARAM_STR);
+            $sqlCobro->bindValue(2,$tarifaCobro ,PDO::PARAM_STR);
+            $sqlCobro->bindValue(3,$valor_riego, PDO::PARAM_STR);
+            $sqlCobro->bindValue(4,$multaSesion, PDO::PARAM_STR);
+            $sqlCobro->bindValue(5,$multaMinga, PDO::PARAM_STR);
+            $sqlCobro->bindValue( 6,$valor_mora, PDO::PARAM_STR);
+            $sqlCobro->bindValue( 7,"PENDIENTE", PDO::PARAM_STR);
+            $sqlCobro->bindValue( 8,$valor_total, PDO::PARAM_STR);
+            $sqlCobro->bindValue( 9,$id_cliente, PDO::PARAM_INT);
+            $queryCobros=$sqlCobro->execute();
+
+        }
 
         return $query;
     }
