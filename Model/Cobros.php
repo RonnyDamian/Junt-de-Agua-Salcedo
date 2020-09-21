@@ -52,33 +52,33 @@ error_reporting(0);
          $sql->bindValue(1,$idCliente, PDO::PARAM_INT);
          $sql->execute();
          $query=$sql->fetch();
-         print_r($query);
-         die();
          return $query;
      }
 
 
 
-     public function editarCliente($data){
-         $sql="UPDATE t_clientes
-              SET nombre=?,
-                  apellido=?,
-                  cedula=?,
-                  sexo=?,                  
-                  direccion=?,
-                  celular=?,
-                  email=?
+     public function editarCobro($data){
+
+         $total=floatval($data['totalPago']);
+         $abono=floatval($data['valorPago']);
+         $total-=$abono;
+         if($total==0){
+             $data['estadoActual']="PAGADO";
+         }
+         $data['totalPago']=$total;
+
+         $sql="UPDATE t_cobros
+              SET 
+                  estado=?,
+                  total=?,
+                  lote=?                  
              WHERE 
-                  idCliente=?";
+                  idCobro=?";
          $sql=Conexion::conectar()->prepare($sql);
-         $sql->bindValue(1, $data['nombre'], PDO::PARAM_STR);
-         $sql->bindValue(2, $data['apellido'], PDO::PARAM_STR);
-         $sql->bindValue(3, $data['cedula'], PDO::PARAM_STR);
-         $sql->bindValue(4, $data['sexo'], PDO::PARAM_STR);
-         $sql->bindValue(6, $data['direccion'], PDO::PARAM_STR);
-         $sql->bindValue(5, $data['celular'], PDO::PARAM_STR);
-         $sql->bindValue(7, $data['email'], PDO::PARAM_STR);
-         $sql->bindValue(8, $data['idCliente'], PDO::PARAM_INT);
+         $sql->bindValue(1, $data['estadoActual'], PDO::PARAM_STR);
+         $sql->bindValue(2, $data['totalPago'], PDO::PARAM_STR);
+         $sql->bindValue(3, $data['lotePago'], PDO::PARAM_STR);
+         $sql->bindValue(4, $data['idCobro'], PDO::PARAM_INT);
          $query=$sql->execute();
          return $query;
      }

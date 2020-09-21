@@ -7,4 +7,5 @@ $searchParam=$_POST['searchParam'];
 
     echo json_encode(Lote::obtenerCobro($searchParam));
 
+
 ?>

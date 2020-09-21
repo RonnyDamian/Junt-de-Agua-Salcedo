@@ -3,6 +3,7 @@
  error_reporting(0);
 
 
+
  class Lote extends Conexion{
 
 
@@ -128,6 +129,22 @@
          die();
     }
     public static function obtenerCobro($searchParam){
+         //Obtener total de Lotes
+
+        $sql6 = "SELECT l.idLote,
+			 l.idCliente,
+			 l.numLote,
+			 c.idCliente,
+			 CONCAT(c.nombre,' ', c.apellido) AS Cliente,
+			 c.cedula			 
+            FROM t_clientes AS c INNER JOIN t_lotes AS l
+            ON c.idCliente =l.idCliente
+            WHERE c.cedula=?";
+
+        $sql6=Conexion::conectar()->prepare($sql6);
+        $sql6->bindValue(1, $searchParam,PDO::PARAM_INT);
+        $sql6->execute();
+        $query=$sql6->fetchAll(PDO::FETCH_ASSOC);
 
          /*CALCULO VALOR A PAGAR POR LA HORA DE RIEGO*/
 
@@ -199,10 +216,10 @@
          $query=$sql->fetch();
          $query['valor_riego']=$valorRiego;
          $query[7]=$valorRiego;
-        $query['valor_sesion']=$valorSesion;
-        $query[8]=$valorSesion;
-        $query['valor_minga']=$valorMinga;
-        $query[9]=$valorMinga;
+         $query['valor_sesion']=$valorSesion;
+         $query[8]=$valorSesion;
+         $query['valor_minga']=$valorMinga;
+         $query[9]=$valorMinga;
         $fecha=date('Y');
         if($fecha>2020){
            $valorMora=10;
@@ -217,6 +234,7 @@
         $query['valor_total']=$total;
         $query[11]=$total;
 
+
         $cliente=$query['nombre'] ." ".$query['apellido'];
         $tarifaCobro=$query['TARIFA'];
         $valor_riego=$query['valor_riego'];
@@ -225,6 +243,7 @@
         $valor_mora=$query['valor_mora'];
         $valor_total=$query['valor_total'];
         $id_cliente=$query['idCliente'];
+
 
         $sqlCC="SELECT * FROM t_cobros WHERE idCliente =?";
         $sqlCC=Conexion::conectar()->prepare($sqlCC);
@@ -246,7 +265,6 @@
             $queryCobros=$sqlCobro->execute();
 
         }
-
         return $query;
     }
 

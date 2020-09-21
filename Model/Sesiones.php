@@ -60,6 +60,26 @@ error_reporting(0);
          return $query;
      }
 
+
+     public static function obtenerSesionMovil($fecha){
+         $sql="SELECT 
+                        s.idCliente,
+                        s.fecha,
+                        s.estado,
+                        s.idSesion,
+                        c.idCliente,
+                        c.nombre,
+                        c.apellido                        
+               FROM t_sesiones AS s INNER JOIN t_clientes AS c
+               ON s.idCliente=c.idCliente
+                WHERE fecha=?";
+         $sql=Conexion::conectar()->prepare($sql);
+         $sql->bindValue(1,$fecha, PDO::PARAM_STR);
+         $sql->execute();
+         $query=$sql->fetchAll(PDO::FETCH_ASSOC);
+         return $query;
+     }
+
      public function editarSesion($data){
          $sql="UPDATE t_sesiones
               SET estado=?,fecha=? WHERE idSesion=?";

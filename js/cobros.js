@@ -82,76 +82,7 @@ function agregarLote(){
 }
 
 
-function editarLote(){
-    $.ajax({
-        url:"../Controller/editarLote.php",
-        type:"POST",
-        data:$("#frmLoteu").serialize(),
-        success:function (r) {
-            if(r==1){
-                setTimeout("location.href='../View/listadoLote.php'", 1900);
-                toastr.options = {
-                    "closeButton":true,
-                    "debug": false,
-                    "newestOnTop": true,
-                    "progressBar": false,
-                    "positionClass": "toast-top-center",
-                    "preventDuplicates": true,
-                    "onclick": null,
-                    "showDuration": "100",
-                    "hideDuration": "500",
-                    "timeOut": "2500",
-                    "extendedTimeOut": "500",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                }
-                toastr["success"]("Lote actualizado exitosamente", "Actualizado con éxito")
-            }else{
-                toastr.options = {
-                    "closeButton":true,
-                    "debug": false,
-                    "newestOnTop": true,
-                    "progressBar": true,
-                    "positionClass": "toast-top-center",
-                    "preventDuplicates": true,
-                    "onclick": null,
-                    "showDuration": "300",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                }
-                toastr["error"]("Error al editar Lote", "Error de regostro")
-            }
 
-        }
-
-    });
-    return false;
-}
-
-function obtenerLote(idLote){
-    $.ajax({
-        url:"../Controller/obtenerLote.php",
-        type:"POST",
-        data:"idLote=" +idLote,
-        success:function (r) {
-            r=JSON.parse(r);
-            $("#idClienteu").val(r['idCliente']);
-            $("#claveu").val(r['clave']);
-            $("#numLoteu").val(r['numLote']);
-            $("#superficieu").val(r['superficie']);
-            $("#preciou").val(r['precio']);
-            $("#idOvalou").val(r['idOvalo']);
-            $("#idLote").val(r['idLote']);
-        }
-    });
-}
 function eliminarLote(idLote){
     swal.fire({
         title: "¿Estás seguro de eliminar este registro?",
@@ -219,7 +150,7 @@ function obtenerCobros(){
         type:"post",
         data:$("#frmT").serialize(),
         success:function(response) {
-
+            alert(response);
             if (response!=null) {
                 response = JSON.parse(response);
                 $("#clienteT").val(response['nombre'] + " " + response['apellido']);
@@ -227,9 +158,8 @@ function obtenerCobros(){
                 $("#riegoT").val("$"+response['valor_riego']);
                 $("#sesionT").val("$"+response['valor_sesion']);
                 $("#mingaT").val("$"+response['valor_minga']);
-                $("#valorMoraT").val("$" + 0);
+                $("#valorMoraT").val(0);
                 $("#totalT").val("$"+response['valor_total']);
-                $("#id_cliente").val(response['idCliente']);
 
 
             } else {
@@ -257,31 +187,73 @@ function obtenerCobros(){
     return false;
 }
 
-function limpiar(){
-
-    $("#clienteT").val("");
-    $("#tarifaT").val("");
-    $("#riegoT").val("");
-    $("#sesionT").val("");
-    $("#mingaT").val("");
-    $("#valorMoraT").val("");
-    $("#totalT").val("");
-}
-
-
-function obtenerCobroModal(){
+function obtenerCobroModal(valor){
     var valor = document.getElementById("id_cliente").value;
     $.ajax({
         url:"../Controller/cobroModal.php",
         type:"POST",
         data:"id_cliente="+valor,
         success:function(response) {
-            alert(response);
             response=JSON.parse(response);
             $("#idCliente").val(response['idCliente']);
             $("#cliente").val(response['cliente']);
             $("#totalPago").val(response['total']);
-            $("#lotePago").val(response['lote']);
+            $("#estadoActual").val(response['estado']);
+            $("#deudaActual").val('$ ' + response['total']);
+            $("#idCobro").val(response['idCobro']);
+
         }
     });
+}
+function editarCobro(){
+    $.ajax({
+        url:"../Controller/editarCobro.php",
+        type:"POST",
+        data:$("#frmCobrou").serialize(),
+        success:function (r) {
+            if(r==1){
+                setTimeout("location.href='../View/pagoCuotas.php'", 1900);
+                toastr.options = {
+                    "closeButton":true,
+                    "debug": false,
+                    "newestOnTop": true,
+                    "progressBar": false,
+                    "positionClass": "toast-top-center",
+                    "preventDuplicates": true,
+                    "onclick": null,
+                    "showDuration": "100",
+                    "hideDuration": "500",
+                    "timeOut": "2500",
+                    "extendedTimeOut": "500",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
+                toastr["success"]("Lote actualizado exitosamente", "Actualizado con éxito")
+            }else if (r==2){
+                toastr.options = {
+                    "closeButton":true,
+                    "debug": false,
+                    "newestOnTop": true,
+                    "progressBar": true,
+                    "positionClass": "toast-top-center",
+                    "preventDuplicates": true,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
+                    toastr["warning"]("El valor a pagar es mayor al saldo total", "Valores incorrectos")
+            }
+
+        }
+
+    });
+    return false;
 }

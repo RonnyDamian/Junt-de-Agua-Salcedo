@@ -68,6 +68,7 @@
 
 <!-- Page level custom scripts -->
 <script src="../public/js/demo/datatables-demo.js"></script>
+<script src="../public/pdf/html2pdf.bundle.min.js"></script>
 <script src="../js/usuarios.js"></script>
 <script src="../js/ovalos.js"></script>
 <script src="../js/clientes.js"></script>
@@ -80,6 +81,8 @@
 <script src="../js/mingas.js"></script>
 <script src="../js/notificaciones.js"></script>
 <script src="../js/select2.js"></script>
+<script src="../js/pdf.js"></script>
+
 <!-- Core plugin JavaScript-->
 
 
