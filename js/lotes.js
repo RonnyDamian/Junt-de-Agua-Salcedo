@@ -153,14 +153,16 @@ function obtenerLote(idLote){
     });
 }
 function eliminarLote(idLote){
-    swal.fire({
-        title: "¿Estás seguro de eliminar este registro?",
-        text: "!Una vez eliminado no podra recuperarse¡",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true,
-    }).then((willDelete) => {
-        if (willDelete) {
+    Swal.fire({
+        title: '¿Está seguro de eliminar este registro?',
+        text: "Una vez eliminado ya no se podra recuperar!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '¡Si, eliminelo!'
+    }).then((result) => {
+        if (result.value) {
             $.ajax({
                 type:"POST",
                 url:"../Controller/eliminarLote.php",

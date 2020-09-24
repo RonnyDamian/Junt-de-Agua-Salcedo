@@ -189,65 +189,73 @@ function obtenerCliente(idCliente){
 }
 
 function eliminarCliente(idCliente){
-    swal.fire({
-        title: "¿Estás seguro de eliminar este registro?",
-        text: "!Una vez eliminado no podra recuperarse¡",
-        type: "warning",
-        buttons: true,
-        dangerMode: true,
-    }).then((willDelete) => {
-            if (willDelete) {
-                $.ajax({
-                    type:"POST",
-                    url:"../Controller/eliminarCliente.php",
-                    data: "idCliente="+idCliente,
-                    success:function(r){
-                        console.log(r);
-                        if(r==1){
-                            setTimeout("location.href='../View/listadoClientes.php'", 1900);
-                            toastr.options = {
-                                "closeButton":true,
-                                "debug": false,
-                                "newestOnTop": true,
-                                "progressBar": false,
-                                "positionClass": "toast-top-center",
-                                "preventDuplicates": true,
-                                "onclick": null,
-                                "showDuration": "100",
-                                "hideDuration": "500",
-                                "timeOut": "2500",
-                                "extendedTimeOut": "500",
-                                "showEasing": "swing",
-                                "hideEasing": "linear",
-                                "showMethod": "fadeIn",
-                                "hideMethod": "fadeOut"
-                            }
-                            toastr["success"]("Cliente eliminado exitosamente", "Registro eliminado")
-                        }else{
-                            toastr.options = {
-                                "closeButton":true,
-                                "debug": false,
-                                "newestOnTop": true,
-                                "progressBar": true,
-                                "positionClass": "toast-top-center",
-                                "preventDuplicates": true,
-                                "onclick": null,
-                                "showDuration": "300",
-                                "hideDuration": "1000",
-                                "timeOut": "5000",
-                                "extendedTimeOut": "1000",
-                                "showEasing": "swing",
-                                "hideEasing": "linear",
-                                "showMethod": "fadeIn",
-                                "hideMethod": "fadeOut"
-                            }
-                            toastr["error"]("Error al eliminar el cliente", "Error de eliminación")
+    Swal.fire({
+        title: '¿Está seguro de eliminar este registro?',
+        text: "Una vez eliminado ya no se podra recuperar!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '¡Si, eliminelo!'
+    }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                type:"POST",
+                url:"../Controller/eliminarCliente.php",
+                data: "idCliente="+idCliente,
+                success:function(r){
+                    console.log(r);
+                    if(r==1){
+                        setTimeout("location.href='../View/listadoClientes.php'", 1900);
+                        toastr.options = {
+                            "closeButton":true,
+                            "debug": false,
+                            "newestOnTop": true,
+                            "progressBar": false,
+                            "positionClass": "toast-top-center",
+                            "preventDuplicates": true,
+                            "onclick": null,
+                            "showDuration": "100",
+                            "hideDuration": "500",
+                            "timeOut": "2500",
+                            "extendedTimeOut": "500",
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
                         }
+                        toastr["success"]("Cliente eliminado exitosamente", "Registro eliminado")
+                    }else{
+                        toastr.options = {
+                            "closeButton":true,
+                            "debug": false,
+                            "newestOnTop": true,
+                            "progressBar": true,
+                            "positionClass": "toast-top-center",
+                            "preventDuplicates": true,
+                            "onclick": null,
+                            "showDuration": "300",
+                            "hideDuration": "1000",
+                            "timeOut": "5000",
+                            "extendedTimeOut": "1000",
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
+                        }
+                        toastr["error"]("Error al eliminar el cliente", "Error de eliminación")
                     }
-                });
-            }
-        });
+                }
+            });
+        }
+    })
 }
+
+
+
+
+
+
 
 
     /*Método para conectar al WEBSERVICES*/

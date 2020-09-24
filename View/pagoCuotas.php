@@ -70,21 +70,6 @@
                 </div>
             </div>
             <hr>
-            <div class="row mt-2 mb-4">
-                <div class="col-lg-4">
-                    <label for="tarifa"><strong>Total a Pagar</strong></label>
-                    <input type="text" name="totalT" id="totalT" readonly class="form-control">
-                </div>
-                <div class="col-lg-4">
-                    <label for="tarifa"><strong>Lotes a Pagar</strong></label>
-                    <select name="listaLotes" id="listaLotes" class="form-control">
-                        <option value="" selected disabled>-- Seleccione una opción --</option>
-                        <option value="Todos Los lotes">Todos los Lotes</option>
-
-                    </select>
-                </div>
-            </div>
-
             <div class="row">
                 <div class="col">
                     <button class="btn btn-danger float-right" onclick="return limpiar()">

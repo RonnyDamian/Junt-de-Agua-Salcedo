@@ -40,16 +40,10 @@
                     <hr class="sidebar-divider">
                     <div id="contPDF">
 
-                         <h2 class="text-center"><u>Junta de Agua Pilalo - Reporte de Cobros</u></h2>
-                        <img  src="../public/img/juntagua.jpeg" alt=""  width="600" height="150" style="margin-left: 20%;border-radius: 10%;margin-bottom: 15px;"> <br>
-
-                        <label for="fecha"><strong>Fecha:</strong></label>
-                        <input type="text" class="border-0 mt-5" id="fecha" style="width: 320px" readonly>
-                        <div class="row">
 
                             <!-- **********   Inicio Tabla Lotes   **********-->
 
-                            <div class="col">
+                            <div class="col-lg-12">
                                 <?php
                                 error_reporting(0);
                                 $total=0;
@@ -59,6 +53,7 @@
                                 if(isset($_POST['enviar'])){
                                     require_once ("../config/Conexion.php");
                                     $cedula = $_POST['searchParam'];
+
 
                                     $sql="SELECT  DISTINCT(h.horaRiego),
                                 c.idCliente,
@@ -79,7 +74,28 @@
                                     $sql->bindValue(1,$cedula,PDO::PARAM_STR);
                                     $sql->execute();
                                     $response=$sql->fetchAll();
+                                    $cliente=$response['Cliente'];
 
+                                    echo '<table class="table-bordered table-responsive-lg table table-success">
+                            <tr>
+                                <th colspan="5" class="text-center  " style="font-size: 25px;"><strong>Junta de Agua Pilalo</strong></th>
+                            </tr>
+                            <tr class="">
+                                <th >Fecha:</th>
+                                <td class=""><input type="text" class="border-0 " id="fecha" style="width: 320px;color:#858796;background-color: #bff0de;" readonly></td>
+                                <th >Ciudad</th>
+                                <td class="col-sm-3">Salcedo, Cotopaxi, Ecuador</td>
+                                <td rowspan="2"><img src="../public/img/juntagua.jpeg" alt="Imagen de prueba" width="100" height="100"></td>
+
+                            </tr>
+                            <tr class="col-lg-4">
+                                <th >Cliente</th>
+                                <td>'.$response[2][2].'</td>
+                                <th >Reporte</th>
+                                <td>Cobros</td>
+                            </tr>
+
+                        </table>';
                                     $tabla='<br> <h2>Resumen Lote</h2>  <table class="table-bordered table mt-3 ">
                             <thead class="bg-success text-white text-center">
                     <tr>
@@ -104,19 +120,16 @@
                                     <td>'.$value['horaRiego'].' horas'.'</td>                                                                                                                                                                                                             
                                 </tr>';
                                     }
-
                                     echo $tabla.$datosTabla.'
                                 </tbody>
                                 <tfoot class="bg-success text-white">
-                                   <td colspan=3  class="text-center"><strong>TOTAL PAGO LOTES : '.$total.' </strong ></td>
-                                   <td class="text-center"><strong >TOTAL PAGO RIEGO: '.$totalH.'</strong></td>
+                                   <td colspan=3  class="text-center"><strong>TOTAL PAGO LOTES $'.$total.' </strong ></td>
+                                   <td class="text-center"><strong >TOTAL PAGO RIEGO $'.$totalH.'</strong></td>
                                 </tfoot>
                                 </table>';
                                 }
                                 ?>
                             </div>
-
-
 
 
                             <!--**********  Inicio tabla sesiones   **********-->
@@ -165,7 +178,7 @@
                                     echo $tabla.$datosTabla.'
                                 </tbody>
                                 <tfoot class="bg-warning text-white">
-                                   <td colspan=4  class="text-center"><strong>TOTAL PAGO POR INASISTENCIA EN LAS SESIONES: '.$totalSesion.' </strong ></td>                                   
+                                   <td colspan=4  class="text-center"><strong>TOTAL PAGO POR INASISTENCIA EN LAS SESIONES: $'.$totalSesion.' </strong ></td>                                   
                                 </tfoot>
                                 </table>';
                                 }
@@ -175,7 +188,7 @@
 
                         <!--**********   Inicio Tabla Mingas   **********-->
                        <div class="row">
-                           <div class="col-lg-6">
+                        <div class="col-lg-12">
                         <?php
                         if(isset($_POST['enviar'])){
                             require_once ("../config/Conexion.php");
@@ -220,7 +233,58 @@
                             echo $tabla.$datosTabla.'
                                 </tbody>
                                 <tfoot class="bg-info text-white">
-                                   <td colspan=4  class="text-center"><strong>TOTAL PAGO POR INASISTENCIA EN LAS MINGAS: '.$totalMinga.' </strong ></td>                                   
+                                   <td colspan=4  class="text-center"><strong>TOTAL PAGO POR INASISTENCIA EN LAS MINGAS $'.$totalMinga.' </strong ></td>                                   
+                                </tfoot>
+                                </table>';
+                        }
+                        ?>
+                           </div>
+                            <div class="col">
+                        <!--*********  Resume ntabla cobros *********-->
+                        <?php
+                        if(isset($_POST['enviar'])){
+                            require_once ("../config/Conexion.php");
+
+                            $sqlCo="SELECT 
+                                     c.idCliente,	    
+                                     co.cliente,
+                                     co.numLote,
+                                     co.total,
+                                     co.estado
+                                   FROM t_clientes AS c INNER JOIN t_cobros AS co
+                                   ON c.idCliente=co.idCliente
+                                   WHERE c.cedula=?";
+                            $sqlCo=Conexion::conectar()->prepare($sqlCo);
+                            $sqlCo->bindValue(1,$cedula,PDO::PARAM_STR);
+                            $sqlCo->execute();
+                            $responseCo=$sqlCo->fetchAll();
+                            $tabla='<br> <h2>Resumen Pagos</h2>  <table class="table-bordered table mt-3 ">
+                            <thead class="bg-dark text-white text-center">
+                    <tr>
+                                <th>Cliente</th>
+                                <th>Lote(s) Pagado(s)</th>
+                                <th>Deuda actual</th>
+                                <th>Estado Deuda</th>                                
+                    </tr>
+                    </thead>
+                              <tbody>';
+                            $datosTabla="";
+
+                            foreach ($responseCo as $key => $valueCo ){
+                                    $totalCobro=$valueCo['total'];
+                                $datosTabla=$datosTabla.'
+                                     
+                                <tr class="text-center">
+                                    <td>'.$valueCo['cliente'].'</td>
+                                    <td >'.$valueCo['numLote'].'</td>
+                                    <td >'.$valueCo['total'].'</td>
+                                    <td>'.$valueCo['estado'].'</td>                                                                                                                                                                                                             
+                                </tr>';
+                            }
+                            echo $tabla.$datosTabla.'
+                                </tbody>
+                                <tfoot class="bg-dark text-white">
+                                   <td colspan=4  class="text-center"><strong>SITUACIÓN ACTUAL DE DEUDA  $'.$totalCobro.' </strong ></td>                                   
                                 </tfoot>
                                 </table>';
                         }
@@ -229,7 +293,7 @@
                        </div>
                     </div>
                     <div class="form-row text-center">
-                        <div class="col-lg-12">
+                        <div class="col-lg-12 mb-4">
                             <a href="#" class=" btn btn-danger" id="report"><i class="fa fa-print">Generar Reporte</i></a>
                         </div>
                     </div>
@@ -237,7 +301,7 @@
             </div>
         </div>
     </div>
-</div>
+
 
 
 <!--Fin página Clientes -->s
@@ -248,7 +312,7 @@
     $(document).ready(function(){
 
         let dias=new Array('Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado');
-        let meses=new Array('Enero','Febrero','Marzos','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre');
+        let meses=new let meses=new Array('Enero','Febrero','Marzos','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre');
         let now=new Date();
         let day = dias[now.getDay()]+ ' '+ now.getDate();
         let month=meses[now.getMonth()];
@@ -257,6 +321,3 @@
     });
 
 </script>
-
-
-

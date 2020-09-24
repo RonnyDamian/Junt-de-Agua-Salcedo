@@ -2,8 +2,47 @@
 /*Llamado del archivo header
  *contenedor del menu
 */
-    require_once("header.php");
+require_once("header.php");
 ?>
+
+    <style>
+        @media  (max-width: 1075px){
+            img{
+                  width:  250px;
+                height: 150px;
+                margin:auto;
+            }
+        }
+        @media  (max-width: 884px){
+            img{
+                width:  200px;
+                height: 100px;
+                margin:auto;
+            }
+        }
+        @media  (max-width: 768px){
+            img{
+                width:  400px;
+                height: 200px;
+                margin:auto;
+            }
+        }
+        @media  (max-width: 590px){
+            img{
+                width:  300px;
+                height: 150px;
+                margin:auto;
+            }
+        }
+        @media  (max-width: 488px){
+            img{
+                width:  150px;
+                height: 90px;
+                margin:auto;
+            }
+        }
+    </style>
+
     <!-- Begin Page Content -->
     <div class="container-fluid">
 
@@ -17,88 +56,57 @@
         <div class="row">
 
             <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
+            <div class="col-xl-6 col-md-6 mb-4">
                 <div class="card border-left-primary shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Cobros</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left-success shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Gastos</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left-info shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Multas</div>
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col-auto">
-                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="progress progress-sm mr-2">
-                                            <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </div>
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"><h4><strong>San Andres de Pilalo</strong></h4></div>
+                                <div class="col-auto form-row">
+                                    <img src="../public/img/juntagua.jpeg" alt="Junta de Agua Pilalo" width="450" height="200" class="mt-3">
                                 </div>
+                                <p class="text-justify mt-3 mb-3">El Barrio San Andrés de Pílalo perteneciente
+                                    a la parroquia rural Cusubamba del Cantón
+                                    Salcedo, se encuentra ubicado en uno de los
+                                    pliegues de la Cordillera Occidental Andina
+                                    con un clima andino de 14°C en promedio, ap
+                                    roximadamente cuenta con 400 moradores en el
+                                    sector.</p>
                             </div>
-                            <div class="col-auto">
-                                <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Pending Requests Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left-warning shadow h-100 py-2">
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-6 col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Listado</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">Inasistencias</div>
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"><h4><strong>Junta de Agua Pilalo</strong></h4></div>
+                                <div class="col-auto form-row">
+                                    <img src="../public/img/canal.jpeg" alt="Junta de Agua Pilalo" width="450" height="200" class="mt-3">
+                                </div>
+                                <p class="text-justify mt-3 mb-3">
+                                    San Andrés de Pilaló fue fundada el 27 de noviembre
+                                    de 1862, para dar acogida a una gran cantidad de per
+                                    sonas emprendedoras y comerciantes de productos agrí
+                                    colas, se caracteriza por el cultivo de alfalfa, maíz,
+                                    cebolla, papas entre otros, el producto predominante e
+                                    s el tomate de riñón, los productos se expenden en los
+                                    mercados mayoristas de las provincias de Cotopaxi y Tun
+                                    gurahua generándoles así un ingreso económico de 500 dó
+                                    lares semanalmente.</p>
                             </div>
-                            <div class="col-auto">
-                                <i class="fas fa-comments fa-2x text-gray-300"></i>
-                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Content Row -->
-
-
-
-        <!-- Content Row -->
+            <!-- Content Row -->
 
 
 
@@ -107,5 +115,5 @@
  *contenedor del pie de pagi
  * y modal cierre de sesión
  *  */
-  require_once("footer.php");
+require_once("footer.php");
 ?>

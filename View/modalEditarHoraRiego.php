@@ -195,9 +195,9 @@
                         <div class="col-xl-12 col-lg-12 mb-5" >
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <a href="home.php" class="btn btn-danger float-right">
-                                        <i class="fa fa-undo-alt"></i>
-                                        Volver
+                                    <a  class="btn btn-danger float-right text-white" data-dismiss="modal">
+                                        <i class="fa fa-window-close"></i>
+                                        Cancelar
                                     </a>
                                 </div>
                                 <div class="col-lg-6">

@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const $elementoParaConvertir = document.getElementById('contPDF'); // <-- Aquí puedes elegir cualquier elemento del DOM
         html2pdf()
             .set({
-                margin: 1,
+                margin: 0.3,
                 filename: 'cobros.pdf',
                 image: {
                     type: 'jpeg',
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 },
                 jsPDF: {
                     unit: "in",
-                    format: "a3",
+                    format: "a4",
                     orientation: 'portrait' // landscape o portrait
                 }
             })

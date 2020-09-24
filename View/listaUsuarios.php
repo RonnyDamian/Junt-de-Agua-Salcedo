@@ -65,11 +65,9 @@
 
 }
 
-
  echo $tabla.$datosTabla.'</tbody></table>';
 
 ?>
 <!--Fin Página listado usuarios-->
 <?php require_once ("modalEditarUsuario.php")?>
-<?php require_once ("modalElimianrUsuarios.php")?>
 <?php require_once("footer.php")?>

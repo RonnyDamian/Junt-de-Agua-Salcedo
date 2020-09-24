@@ -25,9 +25,8 @@
                         </div>
                     </div>
                     <div class="row mt-2 mb-4">
-                        <div class="col">
-                            <label for="lotePago"><strong>Lote a pagar</strong></label>
-                            <input type="text" class="form-control" name="lotePago" id="lotePago"  maxlength="150" required="required">
+                        <div class="col" id="selector">
+
                         </div>
                         <div class="col">
                             <label for="valorPago"><strong>Valor abonado</strong></label>
@@ -41,19 +40,19 @@
                         </div>
                         <div class="col">
                             <label for="deudaActual"><strong>Estado Actual</strong></label>
-                            <input type="text" class="form-control bg-danger text-white" name="estadoActual" id="estadoActual"  minlength="3"  maxlength="100" required="required" readonly>
+                            <input type="text" class="form-control text-white" name="estadoActual" id="estadoActual"  minlength="3"  maxlength="100" required="required" readonly>
                         </div>
                     </div>
                     <hr>
                     <div class="row">
                         <div class="col ">
-                            <a href="home.php" class="btn btn-danger float-right">
-                                <i class="fa fa-undo-alt"></i>
-                                Volver
+                            <a href="home.php" class="btn btn-danger float-right" data-dismiss="modal">
+                                <i class="fa fa-times"></i>
+                                Cancelar
                             </a>
                         </div>
                         <div class="col">
-                            <button type="submit" class="btn btn-success float-left" id="enviar" >
+                            <button type="submit" class="btn btn-success float-left" id="enviarDos" >
                                 <i class="far fa-save"></i>
                                 Guardar
                             </button>

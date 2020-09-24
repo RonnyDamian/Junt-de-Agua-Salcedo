@@ -49,9 +49,9 @@ $color=array(
                     <hr>
                     <div class="row">
                         <div class="col ">
-                            <a href="home.php" class="btn btn-danger float-right">
-                                <i class="fa fa-undo-alt"></i>
-                                Volver
+                            <a  class="btn btn-danger float-right text-white" data-dismiss="modal">
+                                <i class="fa fa-window-close"></i>
+                                Cancelar
                             </a>
                         </div>
                         <div class="col">

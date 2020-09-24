@@ -1,4 +1,4 @@
-<title>Reporte de Cobros</title>
+<title>Reporte de Mingas</title>
 <?php  require_once("header.php")?>
 
 <!--Inicio página Clientes -->
@@ -14,7 +14,7 @@
             <div class="card shadow mb-4 ">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between ">
-                    <h3 class="m-0 font-weight-bold text-primary ">Reporte de Sesiones</h3>
+                    <h3 class="m-0 font-weight-bold text-primary ">Reporte de Mingas</h3>
                     <div class="dropdown no-arrow">
                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
@@ -43,11 +43,8 @@ s                                        <option value="2">Sin Asistir</option>
                     <hr class="sidebar-divider">
                     <div id="contPDF">
 
-                         <h2 class="text-center"><u>Junta de Agua Pilalo - Reporte de Sesiones</u></h2>
-                        <img  src="../public/img/juntagua.jpeg" alt=""  width="600" height="150" style="margin-left: 20%;border-radius: 10%;margin-bottom: 15px;"> <br>
 
-                        <label for="fecha"><strong>Fecha:</strong></label>
-                        <input type="text" class="border-0 mt-5" id="fecha" style="width: 320px" readonly>
+
                         <div class="row">
 
                             <!-- **********   Inicio Tabla Sesiones   **********-->
@@ -60,21 +57,41 @@ s                                        <option value="2">Sin Asistir</option>
                                 $si=0;
                                 $no=0;
                                 if(isset($_POST['enviar'])){
+                                    echo '<table class="table-bordered table-responsive-lg table table-success">
+                            <tr>
+                                <th colspan="5" class="text-center  " style="font-size: 25px;"><strong>Junta de Agua Pilalo</strong></th>
+                            </tr>
+                            <tr class="">
+                                <th >Fecha:</th>
+                                <td class=""><input type="text" class="border-0 " id="fecha" style="width: 320px;color:#858796;background-color: #bff0de;" readonly></td>
+                                <th >Ciudad</th>
+                                <td class="col-sm-3">Salcedo, Cotopaxi, Ecuador</td>
+                                <td rowspan="2"><img src="../public/img/juntagua.jpeg" alt="Imagen de prueba" width="100" height="100"></td>
+
+                            </tr>
+                            <tr class="col-lg-4">
+                                <th >Cliente</th>
+                                <td>Por defecto</td>
+                                <th >Reporte</th>
+                                <td>Mingas</td>
+                            </tr>
+
+                        </table>';
                                     require_once ("../config/Conexion.php");
                                     $parametro = $_POST['searchParam'];
                                     if($parametro==0){
                                         /* ******Consulta sesión sin parametros******* */
                                         $sql="SELECT  
                                             CONCAT(c.nombre,' ', c.apellido) AS cliente,
-                                            s.estado,
-                                            s.fecha				
-                                           FROM T_SESIONES  AS S INNER JOIN T_CLIENTES AS C
-                                           ON S.idCliente=c.idCliente";
+                                            m.estado,
+                                            m.fecha				
+                                           FROM T_MINGAS  AS M INNER JOIN T_CLIENTES AS C
+                                           ON M.idCliente=c.idCliente";
                                         $sql=Conexion::conectar()->prepare($sql);
                                         $sql->execute();
                                         $response=$sql->fetchAll();
 
-                                        $tabla='<br> <h2>Resumen Lote</h2>  <table class="table-bordered table mt-3 ">
+                                        $tabla='<br> <h2>Resumen Mingas</h2>  <table class="table-bordered table mt-3 ">
                                         <thead class="bg-dark text-white text-center">
                                     <tr>
                                 <th>Cliente</th>
@@ -119,16 +136,16 @@ s                                        <option value="2">Sin Asistir</option>
 
                                         $sql="SELECT  
                                             CONCAT(c.nombre,' ', c.apellido) AS cliente,
-                                            s.estado,
-                                            s.fecha				
-                                           FROM T_SESIONES  AS S INNER JOIN T_CLIENTES AS C
-                                           ON S.idCliente=c.idCliente
+                                            m.estado,
+                                            m.fecha				
+                                           FROM T_MINGAS  AS M INNER JOIN T_CLIENTES AS C
+                                           ON m.idCliente=c.idCliente
                                            WHERE estado='SI'";
                                         $sql=Conexion::conectar()->prepare($sql);
                                         $sql->execute();
                                         $response=$sql->fetchAll();
 
-                                        $tabla='<br> <h2>Resumen Sesiones asistidas</h2>  <table class="table-bordered table mt-3 ">
+                                        $tabla='<br> <h2>Resumen mingas asistidas</h2>  <table class="table-bordered table mt-3 ">
                                         <thead class="bg-dark text-white text-center">
                                     <tr>
                                 <th>Cliente</th>
@@ -162,16 +179,16 @@ s                                        <option value="2">Sin Asistir</option>
 
                                         $sql="SELECT  
                                             CONCAT(c.nombre,' ', c.apellido) AS cliente,
-                                            s.estado,
-                                            s.fecha				
-                                           FROM T_SESIONES  AS S INNER JOIN T_CLIENTES AS C
-                                           ON S.idCliente=c.idCliente
+                                            m.estado,
+                                            m.fecha				
+                                           FROM T_MINGAS  AS M INNER JOIN T_CLIENTES AS C
+                                           ON m.idCliente=c.idCliente
                                            WHERE estado='NO'";
                                         $sql=Conexion::conectar()->prepare($sql);
                                         $sql->execute();
                                         $response=$sql->fetchAll();
 
-                                        $tabla='<br> <h2>Resumen sesiones no asistidas</h2>  <table class="table-bordered table mt-3 ">
+                                        $tabla='<br> <h2>Resumen mingas no asistidas</h2>  <table class="table-bordered table mt-3 ">
                                         <thead class="bg-dark text-white text-center">
                                     <tr>
                                 <th>Cliente</th>
@@ -182,7 +199,7 @@ s                                        <option value="2">Sin Asistir</option>
                               <tbody>';
                                         $datosTabla="";
                                         foreach ($response as $key => $value ){
-                                            $total+=5;
+                                            $total+=10;
                                             $datosTabla=$datosTabla.'
                                       
                                 <tr class="text-center">

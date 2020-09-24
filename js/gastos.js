@@ -145,14 +145,16 @@ function obtenerGastos(idGastos){
 }
 
 function eliminarGastos(idGastos){
-    swal.fire({
-        type:"warning",
-        title: "¿Estás seguro de eliminar este registro?",
-        text: "!Una vez eliminado no podra recuperarse¡",
-        buttons: true,
-        dangerMode: true,
-    }).then((willDelete) => {
-            if (willDelete) {
+    Swal.fire({
+        title: '¿Está seguro de eliminar este registro?',
+        text: "Una vez eliminado ya no se podra recuperar!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '¡Si, eliminelo!'
+    }).then((result) => {
+        if (result.value) {
                 $.ajax({
                     type:"POST",
                     url:"../Controller/eliminarGastos.php",

@@ -176,25 +176,22 @@ if(empty($_SESSION['s_usuario'])){
             </a>
             <div id="multiCollapseExample5" class="collapse" aria-labelledby="headingTwo" data-parent="">
                 <div class="bg-white py-2 collapse-inner rounded">
+
+                    <a class="collapse-item" href="rSesiones.php">
+                        <i class="fas fa-fw fa-file-alt"></i>
+                        Reporte Sesiones
+                    </a>
+                    <a class="collapse-item" href="rMingas.php">
+                        <i class="fas fa-fw fa-file-alt"></i>
+                        Reporte Mingas
+                    </a>
+                    <a class="collapse-item" href="hriego.php">
+                        <i class="fas fa-fw fa-file-alt"></i>
+                        Reporte Gastos
+                    </a>
                     <a class="collapse-item" href="rCobroClientes.php">
                         <i class="fas fa-fw fa-file-alt"></i>
                         Cobros por Cliente
-                    </a>
-                    <a class="collapse-item" href="lotes.php">
-                        <i class="fas fa-fw fa-file-alt"></i>
-                        Sesiones Asistidas
-                    </a>
-                    <a class="collapse-item" href="hriego.php">
-                        <i class="fas fa-fw fa-file-alt"></i>
-                        Sesiones Inasistidas
-                    </a>
-                    <a class="collapse-item" href="hriego.php">
-                        <i class="fas fa-fw fa-file-alt"></i>
-                        Mingas Asistidas
-                    </a>
-                    <a class="collapse-item" href="hriego.php">
-                        <i class="fas fa-fw fa-file-alt"></i>
-                        Mingas Inasistidas
                     </a>
                 </div>
             </div>

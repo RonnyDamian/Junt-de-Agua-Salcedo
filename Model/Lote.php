@@ -129,24 +129,8 @@
          die();
     }
     public static function obtenerCobro($searchParam){
-         //Obtener total de Lotes
-
-        $sql6 = "SELECT l.idLote,
-			 l.idCliente,
-			 l.numLote,
-			 c.idCliente,
-			 CONCAT(c.nombre,' ', c.apellido) AS Cliente,
-			 c.cedula			 
-            FROM t_clientes AS c INNER JOIN t_lotes AS l
-            ON c.idCliente =l.idCliente
-            WHERE c.cedula=?";
-
-        $sql6=Conexion::conectar()->prepare($sql6);
-        $sql6->bindValue(1, $searchParam,PDO::PARAM_INT);
-        $sql6->execute();
-        $query=$sql6->fetchAll(PDO::FETCH_ASSOC);
-
          /*CALCULO VALOR A PAGAR POR LA HORA DE RIEGO*/
+
 
          $sql2 = "				SELECT
 								c.cedula,

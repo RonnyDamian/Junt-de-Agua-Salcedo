@@ -1,4 +1,4 @@
-<title>Reporte de Cobros</title>
+<title>Reporte de Sesiones</title>
 <?php  require_once("header.php")?>
 
 <!--Inicio página Clientes -->
@@ -14,7 +14,7 @@
             <div class="card shadow mb-4 ">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between ">
-                    <h3 class="m-0 font-weight-bold text-primary ">Reporte de Cobros</h3>
+                    <h3 class="m-0 font-weight-bold text-primary ">Reporte de Sesiones</h3>
                     <div class="dropdown no-arrow">
                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
@@ -27,9 +27,12 @@
                             <!--Inicio formulario registro usuarios -->
                             <div class="row mt-2 mb-4">
                                 <div class="col-lg-4">
-                                    <label for="nombre"><strong>Cédula</strong></label>
-                                    <input type="search" class="form-control" name="searchParam" id="searchParam" minlength="10" maxlength="10" required="required" >
-
+                                    <label for="nombre"><strong>Parametro de busca</strong></label>
+                                    <select name="searchParam" id="searchParam" class="form-control">
+                                         <option value="0" selected="selected">Todos los registros</option>
+                                         <option value="1">Asistidos</option>
+s                                        <option value="2">Sin Asistir</option>
+                                    </select>
                                 </div>
                                 <div class="col-lg4">
                                     <br>
@@ -40,255 +43,195 @@
                     <hr class="sidebar-divider">
                     <div id="contPDF">
 
-                         <h2 class="text-center"><u>Junta de Agua Pilalo - Reporte de Cobros</u></h2>
-                        <img  src="../public/img/juntagua.jpeg" alt=""  width="600" height="150" style="margin-left: 20%;border-radius: 10%;margin-bottom: 15px;"> <br>
 
-                        <label for="fecha"><strong>Fecha:</strong></label>
-                        <input type="text" class="border-0 mt-5" id="fecha" style="width: 320px" readonly>
                         <div class="row">
 
-                            <!-- **********   Inicio Tabla Lotes   **********-->
+                            <!-- **********   Inicio Tabla Sesiones   **********-->
 
                             <div class="col">
                                 <?php
                                 error_reporting(0);
+                                $rRegistros=0 ;
                                 $total=0;
-                                $totalH=0;
-                                $totalSesion=0;
-                                $totalMinga=0;
+                                $si=0;
+                                $no=0;
                                 if(isset($_POST['enviar'])){
+                                    echo '<table class="table-bordered table-responsive-lg table table-success">
+                            <tr>
+                                <th colspan="5" class="text-center  " style="font-size: 25px;"><strong>Junta de Agua Pilalo</strong></th>
+                            </tr>
+                            <tr class="">
+                                <th >Fecha:</th>
+                                <td class=""><input type="text" class="border-0 " id="fecha" style="width: 320px;color:#858796;background-color: #bff0de;" readonly></td>
+                                <th >Ciudad</th>
+                                <td class="col-sm-3">Salcedo, Cotopaxi, Ecuador</td>
+                                <td rowspan="2"><img src="../public/img/juntagua.jpeg" alt="Imagen de prueba" width="100" height="100"></td>
+
+                            </tr>
+                            <tr class="col-lg-4">
+                                <th >Cliente</th>
+                                <td>Por defecto</td>
+                                <th >Reporte</th>
+                                <td>Sesiones</td>
+                            </tr>
+
+                        </table>';
                                     require_once ("../config/Conexion.php");
-                                    $cedula = $_POST['searchParam'];
+                                    $parametro = $_POST['searchParam'];
+                                    if($parametro==0){
+                                        /* ******Consulta sesión sin parametros******* */
+                                        $sql="SELECT  
+                                            CONCAT(c.nombre,' ', c.apellido) AS cliente,
+                                            s.estado,
+                                            s.fecha				
+                                           FROM T_SESIONES  AS S INNER JOIN T_CLIENTES AS C
+                                           ON S.idCliente=c.idCliente";
+                                        $sql=Conexion::conectar()->prepare($sql);
+                                        $sql->execute();
+                                        $response=$sql->fetchAll();
 
-                                    $sql="SELECT  DISTINCT(h.horaRiego),
-                                c.idCliente,
-                                CONCAT(c.nombre,' ',c.apellido) AS Cliente  ,
-                                c.cedula,
-                                l.idCliente,
-                                l.numLote,
-                                l.precio*8 AS Tarifa,				
-                                h.idCliente				
-                                FROM 
-                                 t_clientes AS c INNER JOIN t_lotes AS l
-                                     ON c.idCliente=l.idCliente
-                                  INNER JOIN t_horaRiego AS h
-                                 ON c.idCliente=h.idCliente AND c.idCliente =h.idCliente
-                            WHERE
-                                  c.cedula=?";
-                                    $sql=Conexion::conectar()->prepare($sql);
-                                    $sql->bindValue(1,$cedula,PDO::PARAM_STR);
-                                    $sql->execute();
-                                    $response=$sql->fetchAll();
-
-                                    $tabla='<br> <h2>Resumen Lote</h2>  <table class="table-bordered table mt-3 ">
-                            <thead class="bg-success text-white text-center">
-                    <tr>
-                                <th>Cliente</th>
-                                <th>N° de Lote</th>
-                                <th>Tarifa</th>
-                                <th>Hora de Riego</th>
-                    </tr>
-                    </thead>
-                              <tbody>';
-                                    $datosTabla="";
-
-                                    foreach ($response as $key => $value ){
-                                        $total+=$value['Tarifa'];
-                                        $totalH+=$value['horaRiego']*0.5;
-                                        $datosTabla=$datosTabla.'
-  
-                                <tr class="text-center">
-                                    <td>'.$value['Cliente'].'</td>
-                                    <td >'.$value['numLote'].'</td>
-                                    <td>'.$value['Tarifa'].'</td>
-                                    <td>'.$value['horaRiego'].' horas'.'</td>                                                                                                                                                                                                             
-                                </tr>';
-                                    }
-
-                                    echo $tabla.$datosTabla.'
-                                </tbody>
-                                <tfoot class="bg-success text-white">
-                                   <td colspan=3  class="text-center"><strong>TOTAL PAGO LOTES $'.$total.' </strong ></td>
-                                   <td class="text-center"><strong >TOTAL PAGO RIEGO $'.$totalH.'</strong></td>
-                                </tfoot>
-                                </table>';
-                                }
-                                ?>
-                            </div>
-
-
-
-
-                            <!--**********  Inicio tabla sesiones   **********-->
-                            <div class="col">
-                                <?php
-                                if(isset($_POST['enviar'])){
-                                    require_once ("../config/Conexion.php");
-
-
-                                    $sql2="SELECT  
-                                CONCAT(c.nombre,' ',c.apellido) AS Cliente,
-                                c.idCliente,
-                                s.idCliente,    
-                                s.estado as Asistencia,
-                                s.fecha
-                                FROM t_sesiones AS s INNER JOIN t_clientes AS c
-                                ON  c.idCliente = s.idCliente
-                                WHERE c.cedula=? AND s.estado='NO'";
-                                    $sql2=Conexion::conectar()->prepare($sql2);
-                                    $sql2->bindValue(1,$cedula,PDO::PARAM_STR);
-                                    $sql2->execute();
-                                    $response2=$sql2->fetchAll();
-                                    $tabla='<br> <h2>Resumen Sesiones</h2>  <table class="table-bordered table mt-3 ">
-                            <thead class="bg-warning text-white text-center">
-                    <tr>
+                                        $tabla='<br> <h2>Resumen Sesiones</h2>  <table class="table-bordered table mt-3 ">
+                                        <thead class="bg-dark text-white text-center">
+                                    <tr>
                                 <th>Cliente</th>
                                 <th>Asistencia</th>
-                                <th>Tarifa</th>
                                 <th>Fecha</th>                                
                     </tr>
                     </thead>
                               <tbody>';
-                                    $datosTabla="";
+                                        $datosTabla="";
 
-                                    foreach ($response2 as $key => $value2 ){
-                                        $totalSesion+=5.00;
-                                        $datosTabla=$datosTabla.'
-                                     
+                                        foreach ($response as $key => $value ){
+
+                                            if($value['estado']=="SI"){
+                                                $si++;
+                                            }else{
+                                                $no++;
+                                            }
+                                            $datosTabla=$datosTabla.'
+                                      
                                 <tr class="text-center">
-                                    <td>'.$value2['Cliente'].'</td>
-                                    <td >'.$value2['Asistencia'].'</td>
-                                    <td>5.00</td>
-                                    <td>'.$value2['fecha'].'</td>                                                                                                                                                                                                             
+                                    <td>'.$value['cliente'].'</td>
+                                    <td >'.$value['estado'].'</td>
+                                    <td>'.$value['fecha'].'</td>                                                                                                                                                                                                                                                 
                                 </tr>';
-                                    }
-                                    echo $tabla.$datosTabla.'
+                                            $rRegistros++;
+                                        }
+
+                                        echo $tabla.$datosTabla.'
                                 </tbody>
-                                <tfoot class="bg-warning text-white">
-                                   <td colspan=4  class="text-center"><strong>TOTAL PAGO POR INASISTENCIA EN LAS SESIONES: $'.$totalSesion.' </strong ></td>                                   
+                                <tfoot class="bg-dark text-white">
+                                   <td   class="text-center"><strong>TOTAL REGISTROS '.$rRegistros.' </strong ></td>
+                                   <td class="text-center"><strong >TOTAL ASISTIDOS '.$si.'</strong></td>
+                                   <td class="text-center"><strong >TOTAL AUSENTES '.$no.'</strong></td>
                                 </tfoot>
                                 </table>';
+                                        $rRegistros=0;
+                                        $si=0;
+                                        $no=0;
+                                    }elseif ($parametro==1){
+
+                                        /* ********** Consulta sesión con parametro SI ********** */
+
+                                        $sql="SELECT  
+                                            CONCAT(c.nombre,' ', c.apellido) AS cliente,
+                                            s.estado,
+                                            s.fecha				
+                                           FROM T_SESIONES  AS S INNER JOIN T_CLIENTES AS C
+                                           ON S.idCliente=c.idCliente
+                                           WHERE estado='SI'";
+                                        $sql=Conexion::conectar()->prepare($sql);
+                                        $sql->execute();
+                                        $response=$sql->fetchAll();
+
+                                        $tabla='<br> <h2>Resumen Sesiones asistidas</h2>  <table class="table-bordered table mt-3 ">
+                                        <thead class="bg-dark text-white text-center">
+                                    <tr>
+                                <th>Cliente</th>
+                                <th>Asistencia</th>
+                                <th>Fecha</th>                                
+                    </tr>
+                    </thead>
+                              <tbody>';
+                                        $datosTabla="";
+                                        $rRegistros=0 ;
+                                        foreach ($response as $key => $value ){
+                                            $datosTabla=$datosTabla.'
+                                      
+                                <tr class="text-center">
+                                    <td>'.$value['cliente'].'</td>
+                                    <td >'.$value['estado'].'</td>
+                                    <td>'.$value['fecha'].'</td>                                                                                                                                                                                                                                                 
+                                </tr>';
+                                            $rRegistros++;
+                                        }
+
+                                        echo $tabla.$datosTabla.'
+                                </tbody>
+                                <tfoot class="bg-dark text-white">
+                                   <td colspan="3" class="text-center"><strong>TOTAL REGISTROS '.$rRegistros.' </strong ></td>                                   
+                                </tfoot>
+                                </table>';
+                                    }elseif ($parametro==2){
+
+                                        /* ********** Consulta sesión con parametro SI ********** */
+
+                                        $sql="SELECT  
+                                            CONCAT(c.nombre,' ', c.apellido) AS cliente,
+                                            s.estado,
+                                            s.fecha				
+                                           FROM T_SESIONES  AS S INNER JOIN T_CLIENTES AS C
+                                           ON S.idCliente=c.idCliente
+                                           WHERE estado='NO'";
+                                        $sql=Conexion::conectar()->prepare($sql);
+                                        $sql->execute();
+                                        $response=$sql->fetchAll();
+
+                                        $tabla='<br> <h2>Resumen sesiones no asistidas</h2>  <table class="table-bordered table mt-3 ">
+                                        <thead class="bg-dark text-white text-center">
+                                    <tr>
+                                <th>Cliente</th>
+                                <th>Asistencia</th>
+                                <th>Fecha</th>                                
+                    </tr>
+                    </thead>
+                              <tbody>';
+                                        $datosTabla="";
+                                        foreach ($response as $key => $value ){
+                                            $total+=5;
+                                            $datosTabla=$datosTabla.'
+                                      
+                                <tr class="text-center">
+                                    <td>'.$value['cliente'].'</td>
+                                    <td >'.$value['estado'].'</td>
+                                    <td>'.$value['fecha'].'</td>                                                                                                                                                                                                                                                 
+                                </tr>';
+                                            $rRegistros++;
+                                        }
+                                        echo $tabla.$datosTabla.'
+                                </tbody>
+                                <tfoot class="bg-dark text-white">
+                                   <td colspan="2" class="text-center"><strong>TOTAL REGISTROS '.$rRegistros.' </strong ></td>
+                                   <td colspan="2" class="text-center"><strong>TOTAL A PAGAR $'.$total.' DOLARES'.' </strong ></td>                                   
+                                </tfoot>
+                                </table>';
+                                    }
                                 }
                                 ?>
                             </div>
                         </div>
-
-                        <!--**********   Inicio Tabla Mingas   **********-->
-                       <div class="row">
-                           <div class="col-lg-6">
-                        <?php
-                        if(isset($_POST['enviar'])){
-                            require_once ("../config/Conexion.php");
-
-
-                            $sql3="SELECT  
-                                CONCAT(c.nombre,' ',c.apellido) AS Cliente,
-                                c.idCliente,
-                                m.idCliente,
-                                m.estado as Asistencia,
-                                m.fecha
-                                FROM t_mingas AS m INNER JOIN t_clientes AS c
-                                ON  c.idCliente = m.idCliente
-                                WHERE c.cedula=? AND m.estado='NO'";
-                            $sql3=Conexion::conectar()->prepare($sql3);
-                            $sql3->bindValue(1,$cedula,PDO::PARAM_STR);
-                            $sql3->execute();
-                            $response3=$sql3->fetchAll();
-                            $tabla='<br> <h2>Resumen Mingas</h2>  <table class="table-bordered table mt-3 ">
-                            <thead class="bg-info text-white text-center">
-                    <tr>
-                                <th>Cliente</th>
-                                <th>Asistencia</th>
-                                <th>Tarifa</th>
-                                <th>Fecha</th>                                
-                    </tr>
-                    </thead>
-                              <tbody>';
-                            $datosTabla="";
-
-                            foreach ($response3 as $key => $value3 ){
-                                $totalMinga+=10.00;
-                                $datosTabla=$datosTabla.'
-                                     
-                                <tr class="text-center">
-                                    <td>'.$value3['Cliente'].'</td>
-                                    <td >'.$value3['Asistencia'].'</td>
-                                    <td>10.00</td>
-                                    <td>'.$value3['fecha'].'</td>                                                                                                                                                                                                             
-                                </tr>';
-                            }
-                            echo $tabla.$datosTabla.'
-                                </tbody>
-                                <tfoot class="bg-info text-white">
-                                   <td colspan=4  class="text-center"><strong>TOTAL PAGO POR INASISTENCIA EN LAS MINGAS $'.$totalMinga.' </strong ></td>                                   
-                                </tfoot>
-                                </table>';
-                        }
-                        ?>
-                           </div>
-                            <div class="col-lg-6">
-                        <!--*********  Resume ntabla cobros *********-->
-                        <?php
-                        if(isset($_POST['enviar'])){
-                            require_once ("../config/Conexion.php");
-
-                            $sqlCo="SELECT 
-                                     c.idCliente,	
-                                     co.cliente,
-                                     co.numLote,
-                                     co.total,
-                                     co.estado
-                                   FROM t_clientes AS c INNER JOIN t_cobros AS co
-                                   ON c.idCliente=co.idCliente
-                                   WHERE c.cedula=?";
-                            $sqlCo=Conexion::conectar()->prepare($sqlCo);
-                            $sqlCo->bindValue(1,$cedula,PDO::PARAM_STR);
-                            $sqlCo->execute();
-                            $responseCo=$sqlCo->fetchAll();
-                            $tabla='<br> <h2>Resumen Pagos</h2>  <table class="table-bordered table mt-3 ">
-                            <thead class="bg-dark text-white text-center">
-                    <tr>
-                                <th>Cliente</th>
-                                <th>Lote(s) Pagado(s)</th>
-                                <th>Deuda actual</th>
-                                <th>Estado Deuda</th>                                
-                    </tr>
-                    </thead>
-                              <tbody>';
-                            $datosTabla="";
-
-                            foreach ($responseCo as $key => $valueCo ){
-                                    $totalCobro=$valueCo['total'];
-                                $datosTabla=$datosTabla.'
-                                     
-                                <tr class="text-center">
-                                    <td>'.$valueCo['cliente'].'</td>
-                                    <td >'.$valueCo['numLote'].'</td>
-                                    <td >'.$valueCo['total'].'</td>
-                                    <td>'.$valueCo['estado'].'</td>                                                                                                                                                                                                             
-                                </tr>';
-                            }
-                            echo $tabla.$datosTabla.'
-                                </tbody>
-                                <tfoot class="bg-dark text-white">
-                                   <td colspan=4  class="text-center"><strong>SITUACIÓN ACTUAL DE DEUDA  $'.$totalCobro.' </strong ></td>                                   
-                                </tfoot>
-                                </table>';
-                        }
-                        ?>
-                       </div>
                        </div>
                     </div>
                     <div class="form-row text-center">
                         <div class="col-lg-12">
-                            <a href="#" class=" btn btn-danger" id="report"><i class="fa fa-print">Generar Reporte</i></a>
+                            <a href="#" class=" btn btn-danger mb-4" id="report"><i class="fa fa-print">Generar Reporte</i></a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
 
 
 <!--Fin página Clientes -->s
